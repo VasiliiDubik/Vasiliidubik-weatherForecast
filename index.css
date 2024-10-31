@@ -52,15 +52,17 @@ body {
   height: 44px;
   display: flex;
   flex-wrap: wrap;
-  /* gap: 40px; */
 }
 
 .refresh-button {
   width: 44px;
   height: 44px;
-  background-image: url(./img/Refresh\ BG.png);
+  background-color: rgba(174, 181, 185, 0.2);
   border-radius: 6px;
-  color: white;
+  background-image: url("./img/Refresh\ BG2.png");
+  background-size: 35%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .lang-box {
@@ -73,7 +75,7 @@ body {
 .lang-en {
   width: 71px;
   height: 44px;
-  background-color: rgba(174, 181, 185, 0.5);
+  background-color: rgba(174, 181, 185, 0.2);
   color: white;
   font-weight: bold;
   border-radius: 6px;
@@ -139,12 +141,18 @@ body {
   padding: 0 10px;
   border-radius: 6px 0 0 6px;
   font-size: 16px;
+  background-color: rgba(174, 181, 185, 0.2);
+  color: white;
+}
+
+.search-input::placeholder {
+  color: white;
 }
 
 .search-button {
   width: 90px;
   height: 44px;
-  background-color: rgba(174, 181, 185, 0.7);
+  background-color: rgba(174, 181, 185, 0.4);
   border-radius: 0 6px 6px 0;
   border: none;
   color: white;
