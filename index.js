@@ -18,13 +18,13 @@ const MONTHS_COLLECTION = {
 };
 
 const DAY_OF_WEEK_COLLECTION = {
-  0: "Sun",
-  1: "Mon",
-  2: "Tue",
-  3: "Wed",
-  4: "Thu",
-  5: "Fri",
-  6: "Sat",
+  0: "Sunday",
+  1: "Monday",
+  2: "Tuesday",
+  3: "Wednesday",
+  4: "Thursday",
+  5: "Friday",
+  6: "Saturday",
 };
 
 let currentBackground = null;
@@ -103,6 +103,9 @@ celsiusButton.addEventListener("click", () => {
 
 const timeElement = document.querySelector(".time");
 const dateElement = document.querySelector(".date");
+const firstDayElement = document.querySelector(".first-day");
+const secondDayElement = document.querySelector(".second-day");
+const lastDayElement = document.querySelector(".last-day");
 
 function setCurrentTime() {
   const currentDate = new Date();
@@ -111,12 +114,23 @@ function setCurrentTime() {
 
   const currentDayOfMonth = currentDate.getDate();
   const currentMonthString = MONTHS_COLLECTION[currentDate.getMonth()];
-  const currentDayOfWeekString = DAY_OF_WEEK_COLLECTION[currentDate.getDay()];
+  const currentDayOfWeekString = DAY_OF_WEEK_COLLECTION[
+    currentDate.getDay()
+  ].slice(0, 3);
+
+  const currentFirstDay =
+    DAY_OF_WEEK_COLLECTION[(currentDate.getDay() + 1) % 7];
+  const currentSecondDay =
+    DAY_OF_WEEK_COLLECTION[(currentDate.getDay() + 2) % 7];
+  const currentLastDay = DAY_OF_WEEK_COLLECTION[(currentDate.getDay() + 3) % 7];
 
   const currentDateString = `${currentDayOfWeekString} ${currentDayOfMonth} ${currentMonthString}`;
 
   timeElement.textContent = currentTimeString;
   dateElement.textContent = currentDateString;
+  firstDayElement.textContent = currentFirstDay;
+  secondDayElement.textContent = currentSecondDay;
+  lastDayElement.textContent = currentLastDay;
 }
 
 setCurrentTime();
