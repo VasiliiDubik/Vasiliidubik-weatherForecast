@@ -136,3 +136,42 @@ function setCurrentTime() {
 setCurrentTime();
 
 setInterval(setCurrentTime, 5000);
+
+const latitudeElement = document.querySelector(".latitude-text");
+const longitudeElement = document.querySelector(".longitude-text");
+
+function successCallback(position) {
+  const latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
+
+  latitudeElement.textContent = `Latitude: ${latitude
+    .toString()
+    .slice(0, 5)
+    .replace(".", "° ")}'`;
+  longitudeElement.textContent = `Longitude: ${longitude
+    .toString()
+    .slice(0, 5)
+    .replace(".", "° ")}'`;
+
+  ymaps.ready(function () {
+    const map = new ymaps.Map("map", {
+      center: [latitude, longitude],
+      zoom: 10,
+    });
+
+    const placemark = new ymaps.Placemark([latitude, longitude], {
+      hintContent: "Ваше текущее местоположение",
+    });
+    map.geoObjects.add(placemark);
+  });
+}
+
+function errorCallback(error) {
+  console.error("Ошибка определения местоположения:", error);
+}
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+} else {
+  console.log("Геолокация не поддерживается этим браузером.");
+}

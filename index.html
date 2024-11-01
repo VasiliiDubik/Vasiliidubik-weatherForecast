@@ -3,10 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="./index.css" />
     <title>Document</title>
+    <script
+      src="https://api-maps.yandex.ru/2.1/?apikey=d5f3becf-b22a-4728-982d-0c0a57417bd8&lang=ru_RU"
+      type="text/javascript"
+    ></script>
   </head>
-  <body>
+  <body onload="initMap()">
     <div class="gradient">
       <section class="section">
         <div class="container">
@@ -97,7 +102,7 @@
             </div>
             <div class="content-map">
               <div class="map-img">
-                <img class="map-img_minsk" src="./img/map-Minsk.png" alt="" />
+                <div id="map" class="map"></div>
               </div>
               <div class="latitude-langitude__wrap">
                 <h2 class="latitude-text">latitude:53° 54'</h2>
@@ -108,6 +113,6 @@
         </div>
       </section>
     </div>
-    <script src="./index.js"></script>
+    <script type="module" src="./index.js"></script>
   </body>
 </html>
