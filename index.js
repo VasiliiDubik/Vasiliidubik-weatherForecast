@@ -175,3 +175,23 @@ if (navigator.geolocation) {
 } else {
   console.log("Геолокация не поддерживается этим браузером.");
 }
+
+function getCountryAndCity(latitude, longitude) {
+  ymaps
+    .geocode([latitude, longitude], { results: 1, lang: "en_RU" })
+    .then(function (res) {
+      const firstGeoObject = res.geoObjects.get(0);
+
+      const country = firstGeoObject.getCountry();
+      const city =
+        firstGeoObject.getLocalities()[0] || "Местоположение недоступно";
+
+      document.querySelector(".place-City").textContent = country;
+      document.querySelector(".place-City").textContent = city;
+    });
+}
+
+navigator.geolocation.getCurrentPosition((position) => {
+  const { latitude, longitude } = position.coords;
+  getCountryAndCity(latitude, longitude);
+});
