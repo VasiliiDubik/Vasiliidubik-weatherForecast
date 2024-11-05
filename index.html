@@ -12,109 +12,105 @@
     ></script>
   </head>
   <body onload="initMap()">
-    <div class="gradient">
-      <section class="section">
-        <div class="container">
-          <div class="navigation-panel">
-            <div class="button-panel">
-              <button class="refresh-button"></button>
-              <div class="lang-box">
-                <button class="lang-en">EN ⋁</button>
-                <button class="lang-ru">RU</button>
-              </div>
-              <div class="temperature-box">
-                <button class="fahrenheit">°F</button>
-                <button class="celsius active">°C</button>
-              </div>
-
-              <div class="search-panel">
-                <input
-                  type="text"
-                  class="search-input"
-                  placeholder="Search city or ZIP"
-                />
-                <button class="search-button">SEARCH</button>
-              </div>
+    <section class="section">
+      <div class="container">
+        <div class="navigation-panel">
+          <div class="button-panel">
+            <button class="refresh-button"></button>
+            <div class="lang-box">
+              <button class="lang-en">EN ⋁</button>
+              <button class="lang-ru">RU</button>
             </div>
-          </div>
-          <div class="content">
-            <div class="content-info">
-              <div class="content-info_place__date">
-                <div class="place">
-                  <h1 class="place-City">MINSK</h1>
-                  <h1 class="place-Country">Belarus</h1>
-                </div>
-                <div class="date-time">
-                  <h3 class="date">Mon 28 October</h3>
-                  <h3 class="time">17:23</h3>
-                </div>
-                <div class="content-info_weather">
-                  <div class="content-info_weather__temperature">
-                    <h1>10°</h1>
-                  </div>
-
-                  <div class="content-info_weather__img">
-                    <img src="./img/Group 26.png" alt="" />
-                  </div>
-
-                  <div class="content-info_weather__characteristics">
-                    <p class="weather__condition">OVERCAST</p>
-                    <p class="weather__feels-like">FEELS LIKE: 7°</p>
-                    <p class="weather__wind">WIND: 2 m/s</p>
-                    <p class="weather__humidity">HUMIDITY: 83%</p>
-                  </div>
-                </div>
-                <div class="weather__forecast">
-                  <div class="weather__forecast-day">
-                    <p class="weather__forecast-day-name first-day">Tuesday</p>
-                    <div class="weather__forecast-day-wrap">
-                      <p class="weather__forecast-temp day1-temp">7°</p>
-                      <img
-                        src="./img/cloud.png"
-                        alt="Cloudy"
-                        class="weather__forecast-icon"
-                      />
-                    </div>
-                  </div>
-                  <div class="weather__forecast-day">
-                    <p class="weather__forecast-day-name second-day">
-                      Wednesday
-                    </p>
-                    <div class="weather__forecast-day-wrap">
-                      <p class="weather__forecast-temp day2-temp">6°</p>
-                      <img
-                        src="./img/cloud.png"
-                        alt="Cloudy"
-                        class="weather__forecast-icon"
-                      />
-                    </div>
-                  </div>
-                  <div class="weather__forecast-day">
-                    <p class="weather__forecast-day-name last-day">Thursday</p>
-                    <div class="weather__forecast-day-wrap">
-                      <p class="weather__forecast-temp day3-temp">3°</p>
-                      <img
-                        src="./img/cloud.png"
-                        alt="Cloudy"
-                        class="weather__forecast-icon"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="temperature-box">
+              <button class="fahrenheit">°F</button>
+              <button class="celsius active">°C</button>
             </div>
-            <div class="content-map">
-              <div id="map" class="map"></div>
 
-              <div class="latitude-langitude__wrap">
-                <h2 class="latitude-text">latitude:53° 54'</h2>
-                <h2 class="longitude-text">longitude:27° 34'</h2>
-              </div>
+            <div class="search-panel">
+              <input
+                type="text"
+                class="search-input"
+                placeholder="Search city or ZIP"
+              />
+              <button class="search-button">SEARCH</button>
             </div>
           </div>
         </div>
-      </section>
-    </div>
+        <div class="content">
+          <div class="content-info">
+            <div class="content-info_place__date">
+              <div class="place">
+                <h1 class="place-City">MINSK</h1>
+                <h1 class="place-Country">Belarus</h1>
+              </div>
+              <div class="date-time">
+                <h3 class="date">Mon 28 October</h3>
+                <h3 class="time">17:23</h3>
+              </div>
+              <div class="content-info_weather">
+                <div class="content-info_weather__temperature">
+                  <h1>10°</h1>
+                </div>
+
+                <div class="content-info_weather__img">
+                  <img src="./img/Group 26.png" alt="" />
+                </div>
+
+                <div class="content-info_weather__characteristics">
+                  <p class="weather__condition">OVERCAST</p>
+                  <p class="weather__feels-like">FEELS LIKE: 7°</p>
+                  <p class="weather__wind">WIND: 2 m/s</p>
+                  <p class="weather__humidity">HUMIDITY: 83%</p>
+                </div>
+              </div>
+              <div class="weather__forecast">
+                <div class="weather__forecast-day">
+                  <p class="weather__forecast-day-name first-day">Tuesday</p>
+                  <div class="weather__forecast-day-wrap">
+                    <p class="weather__forecast-temp day1-temp">7°</p>
+                    <img
+                      src="./img/cloud.png"
+                      alt="Cloudy"
+                      class="weather__forecast-icon"
+                    />
+                  </div>
+                </div>
+                <div class="weather__forecast-day">
+                  <p class="weather__forecast-day-name second-day">Wednesday</p>
+                  <div class="weather__forecast-day-wrap">
+                    <p class="weather__forecast-temp day2-temp">6°</p>
+                    <img
+                      src="./img/cloud.png"
+                      alt="Cloudy"
+                      class="weather__forecast-icon"
+                    />
+                  </div>
+                </div>
+                <div class="weather__forecast-day">
+                  <p class="weather__forecast-day-name last-day">Thursday</p>
+                  <div class="weather__forecast-day-wrap">
+                    <p class="weather__forecast-temp day3-temp">3°</p>
+                    <img
+                      src="./img/cloud.png"
+                      alt="Cloudy"
+                      class="weather__forecast-icon"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="content-map">
+            <div id="map" class="map"></div>
+
+            <div class="latitude-langitude__wrap">
+              <h2 class="latitude-text">latitude:53° 54'</h2>
+              <h2 class="longitude-text">longitude:27° 34'</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <script type="module" src="./index.js"></script>
   </body>
 </html>

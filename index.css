@@ -14,19 +14,12 @@ body {
   justify-content: center;
   align-items: center;
 }
-.gradient {
-  position: relative;
-  z-index: 1;
-  min-height: 100vh;
-  overflow: hidden;
-}
 
 .section {
   position: relative;
   z-index: 2;
   margin: auto;
   width: 100vw;
-  /* max-width: 1260px; */
   min-height: 100vh;
   background-size: cover;
   display: flex;
@@ -49,11 +42,10 @@ body {
 .container {
   position: relative;
   z-index: 2;
-  /* width: 1260px; */
-  width: 100%;
-  /* height: 665px; */
+  max-width: 1280px;
   height: 100%;
-  padding: 0 30px;
+  padding: 0 15px;
+  margin: 0 auto;
 }
 
 .navigation-panel {
@@ -178,7 +170,6 @@ body {
 }
 
 .content {
-  max-width: 1260px;
   margin-top: 60px;
   display: flex;
   gap: 40px;

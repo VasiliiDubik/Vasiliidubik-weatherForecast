@@ -195,3 +195,8 @@ navigator.geolocation.getCurrentPosition((position) => {
   const { latitude, longitude } = position.coords;
   getCountryAndCity(latitude, longitude);
 });
+
+// fetch("http://127.0.0.1:3000/weather")
+//   .then((res) => res.text())
+//   .then((data) => console.log("Полученные данные:", data))
+//   .catch((error) => console.error("Ошибка при запросе:", error));
