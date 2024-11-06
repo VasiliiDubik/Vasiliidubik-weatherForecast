@@ -51,9 +51,9 @@ const mainTemperature = document.querySelector(
   ".content-info_weather__temperature h1"
 );
 const feelsLikeTemp = document.querySelector(".weather__feels-like");
-const day1Temp = document.querySelector(".day1-temp");
-const day2Temp = document.querySelector(".day2-temp");
-const day3Temp = document.querySelector(".day3-temp");
+const day1Temp = document.querySelector(".first-day_temp");
+const day2Temp = document.querySelector(".second-day_temp");
+const day3Temp = document.querySelector(".last-day_temp");
 
 const originalTemperatures = {
   main: parseInt(mainTemperature.textContent),
@@ -137,12 +137,66 @@ setCurrentTime();
 
 setInterval(setCurrentTime, 5000);
 
+async function fetchWeather(latitude, longitude) {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/?latitude=${latitude}&longitude=${longitude}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Ошибка при получении данных о погоде");
+    }
+
+    const data = await response.json();
+
+    document.querySelector(
+      ".content-info_weather__temperature h1"
+    ).textContent = `${data.fact.temp}°`;
+    document.querySelector(
+      ".weather__feels-like"
+    ).textContent = `FEELS LIKE: ${data.fact.feels_like}°`;
+    document.querySelector(".weather__condition").textContent =
+      data.fact.condition.toUpperCase();
+    document.querySelector(
+      ".weather__wind"
+    ).textContent = `WIND: ${data.fact.wind_speed} m/s`;
+    document.querySelector(
+      ".weather__humidity"
+    ).textContent = `HUMIDITY: ${data.fact.humidity}%`;
+
+    document.querySelector(
+      ".first-day_temp"
+    ).textContent = `${data.forecasts[0].parts.day.temp_avg}°`;
+    document.querySelector(
+      ".second-day_temp"
+    ).textContent = `${data.forecasts[1].parts.day.temp_avg}°`;
+    document.querySelector(
+      ".last-day_temp"
+    ).textContent = `${data.forecasts[2].parts.day.temp_avg}°`;
+  } catch (error) {
+    console.error("Ошибка получения погоды:", error);
+  }
+}
+
+navigator.geolocation.getCurrentPosition(
+  (position) => {
+    const { latitude, longitude } = position.coords;
+
+    fetchWeather(latitude, longitude);
+  },
+  (error) => {
+    console.error("Ошибка определения местоположения:", error);
+  }
+);
+
 const latitudeElement = document.querySelector(".latitude-text");
 const longitudeElement = document.querySelector(".longitude-text");
 
 function successCallback(position) {
   const latitude = position.coords.latitude;
   const longitude = position.coords.longitude;
+
+  const loadingText = document.querySelector(".loading-text");
 
   latitudeElement.textContent = `Latitude: ${latitude
     .toString()
@@ -163,6 +217,8 @@ function successCallback(position) {
       hintContent: "Ваше текущее местоположение",
     });
     map.geoObjects.add(placemark);
+
+    loadingText.style.display = "none";
   });
 }
 
@@ -177,26 +233,18 @@ if (navigator.geolocation) {
 }
 
 function getCountryAndCity(latitude, longitude) {
-  ymaps
-    .geocode([latitude, longitude], { results: 1, lang: "en_RU" })
-    .then(function (res) {
-      const firstGeoObject = res.geoObjects.get(0);
+  ymaps.ready(function () {
+    ymaps
+      .geocode([latitude, longitude], { results: 1, lang: "en_RU" })
+      .then(function (res) {
+        const firstGeoObject = res.geoObjects.get(0);
 
-      const country = firstGeoObject.getCountry();
-      const city =
-        firstGeoObject.getLocalities()[0] || "Местоположение недоступно";
+        const country = firstGeoObject.getCountry();
+        const city =
+          firstGeoObject.getLocalities()[0] || "Местоположение недоступно";
 
-      document.querySelector(".place-City").textContent = country;
-      document.querySelector(".place-City").textContent = city;
-    });
+        document.querySelector(".place-country").textContent = country;
+        document.querySelector(".place-city").textContent = city;
+      });
+  });
 }
-
-navigator.geolocation.getCurrentPosition((position) => {
-  const { latitude, longitude } = position.coords;
-  getCountryAndCity(latitude, longitude);
-});
-
-// fetch("http://127.0.0.1:3000/weather")
-//   .then((res) => res.text())
-//   .then((data) => console.log("Полученные данные:", data))
-//   .catch((error) => console.error("Ошибка при запросе:", error));

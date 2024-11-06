@@ -249,8 +249,14 @@ body {
   color: white;
 }
 
-.map-img {
-  margin-top: 40px;
+.content-map {
+  text-align: center;
+  color: white;
+}
+
+.loading-text {
+  font-size: 40px;
+  margin-top: 35%;
 }
 
 .map {

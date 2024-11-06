@@ -11,7 +11,7 @@
       type="text/javascript"
     ></script>
   </head>
-  <body onload="initMap()">
+  <body>
     <section class="section">
       <div class="container">
         <div class="navigation-panel">
@@ -67,7 +67,7 @@
                 <div class="weather__forecast-day">
                   <p class="weather__forecast-day-name first-day">Tuesday</p>
                   <div class="weather__forecast-day-wrap">
-                    <p class="weather__forecast-temp day1-temp">7°</p>
+                    <p class="weather__forecast-temp first-day_temp">7°</p>
                     <img
                       src="./img/cloud.png"
                       alt="Cloudy"
@@ -78,7 +78,7 @@
                 <div class="weather__forecast-day">
                   <p class="weather__forecast-day-name second-day">Wednesday</p>
                   <div class="weather__forecast-day-wrap">
-                    <p class="weather__forecast-temp day2-temp">6°</p>
+                    <p class="weather__forecast-temp second-day_temp">6°</p>
                     <img
                       src="./img/cloud.png"
                       alt="Cloudy"
@@ -89,7 +89,7 @@
                 <div class="weather__forecast-day">
                   <p class="weather__forecast-day-name last-day">Thursday</p>
                   <div class="weather__forecast-day-wrap">
-                    <p class="weather__forecast-temp day3-temp">3°</p>
+                    <p class="weather__forecast-temp last-day_temp">3°</p>
                     <img
                       src="./img/cloud.png"
                       alt="Cloudy"
@@ -101,6 +101,7 @@
             </div>
           </div>
           <div class="content-map">
+            <div class="loading-text">Loading location...</div>
             <div id="map" class="map"></div>
 
             <div class="latitude-langitude__wrap">
