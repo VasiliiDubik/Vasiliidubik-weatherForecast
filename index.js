@@ -1,250 +1,269 @@
-const backgrounds = ["./img/bg1.png", "./img/bg2.png", "./img/bg3.png"];
-const sectionElement = document.querySelector(".section");
-const refreshButton = document.querySelector(".refresh-button");
+class WeatherApp {
+  constructor() {
+    this.backgrounds = ["./img/bg1.png", "./img/bg2.png", "./img/bg3.png"];
+    this.sectionElement = document.querySelector(".section");
+    this.refreshButton = document.querySelector(".refresh-button");
 
-const MONTHS_COLLECTION = {
-  0: "January",
-  1: "February",
-  2: "March",
-  3: "April",
-  4: "May",
-  5: "June",
-  6: "July",
-  7: "August",
-  8: "September",
-  9: "October",
-  10: "November",
-  11: "December",
-};
+    this.MONTHS_COLLECTION = {
+      0: "January",
+      1: "February",
+      2: "March",
+      3: "April",
+      4: "May",
+      5: "June",
+      6: "July",
+      7: "August",
+      8: "September",
+      9: "October",
+      10: "November",
+      11: "December",
+    };
 
-const DAY_OF_WEEK_COLLECTION = {
-  0: "Sunday",
-  1: "Monday",
-  2: "Tuesday",
-  3: "Wednesday",
-  4: "Thursday",
-  5: "Friday",
-  6: "Saturday",
-};
+    this.DAY_OF_WEEK_COLLECTION = {
+      0: "Sunday",
+      1: "Monday",
+      2: "Tuesday",
+      3: "Wednesday",
+      4: "Thursday",
+      5: "Friday",
+      6: "Saturday",
+    };
 
-let currentBackground = null;
+    this.currentBackground = null;
+    this.originalTemperatures = {};
 
-function changeBackground() {
-  let newBackground;
+    this.celsiusButton = document.querySelector(".celsius");
+    this.fahrenheitButton = document.querySelector(".fahrenheit");
 
-  do {
-    newBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-  } while (newBackground === currentBackground);
+    this.mainTemperature = document.querySelector(
+      ".content-info_weather__temperature h1"
+    );
+    this.feelsLikeTemp = document.querySelector(".weather__feels-like");
+    this.day1Temp = document.querySelector(".first-day_temp");
+    this.day2Temp = document.querySelector(".second-day_temp");
+    this.day3Temp = document.querySelector(".last-day_temp");
 
-  sectionElement.style.backgroundImage = `url('${newBackground}')`;
-  currentBackground = newBackground;
-}
+    this.timeElement = document.querySelector(".time");
+    this.dateElement = document.querySelector(".date");
+    this.firstDayElement = document.querySelector(".first-day");
+    this.secondDayElement = document.querySelector(".second-day");
+    this.lastDayElement = document.querySelector(".last-day");
 
-refreshButton.addEventListener("click", changeBackground);
+    this.latitudeElement = document.querySelector(".latitude-text");
+    this.longitudeElement = document.querySelector(".longitude-text");
 
-changeBackground();
+    this.loadingText = document.querySelector(".loading-text");
 
-const celsiusButton = document.querySelector(".celsius");
-const fahrenheitButton = document.querySelector(".fahrenheit");
+    this.setupEventListeners();
+    this.changeBackground();
+    this.setCurrentTime();
 
-const mainTemperature = document.querySelector(
-  ".content-info_weather__temperature h1"
-);
-const feelsLikeTemp = document.querySelector(".weather__feels-like");
-const day1Temp = document.querySelector(".first-day_temp");
-const day2Temp = document.querySelector(".second-day_temp");
-const day3Temp = document.querySelector(".last-day_temp");
-
-const originalTemperatures = {
-  main: parseInt(mainTemperature.textContent),
-  feelsLike: parseInt(feelsLikeTemp.textContent.split(": ")[1]),
-  day1: parseInt(day1Temp.textContent),
-  day2: parseInt(day2Temp.textContent),
-  day3: parseInt(day3Temp.textContent),
-};
-
-function toFahrenheit(celsius) {
-  return Math.round((celsius * 9) / 5 + 32);
-}
-
-function toCelsius(fahrenheit) {
-  return Math.round(((fahrenheit - 32) * 5) / 9);
-}
-
-function updateTemperatures(unit) {
-  if (unit === "F") {
-    mainTemperature.textContent = `${toFahrenheit(originalTemperatures.main)}°`;
-    feelsLikeTemp.textContent = `FEELS LIKE: ${toFahrenheit(
-      originalTemperatures.feelsLike
-    )}°`;
-    day1Temp.textContent = `${toFahrenheit(originalTemperatures.day1)}°`;
-    day2Temp.textContent = `${toFahrenheit(originalTemperatures.day2)}°`;
-    day3Temp.textContent = `${toFahrenheit(originalTemperatures.day3)}°`;
-    fahrenheitButton.classList.add("active");
-    celsiusButton.classList.remove("active");
-  } else {
-    mainTemperature.textContent = `${originalTemperatures.main}°`;
-    feelsLikeTemp.textContent = `FEELS LIKE: ${originalTemperatures.feelsLike}°`;
-    day1Temp.textContent = `${originalTemperatures.day1}°`;
-    day2Temp.textContent = `${originalTemperatures.day2}°`;
-    day3Temp.textContent = `${originalTemperatures.day3}°`;
-    celsiusButton.classList.add("active");
-    fahrenheitButton.classList.remove("active");
+    setInterval(this.setCurrentTime.bind(this), 5000);
   }
-}
 
-fahrenheitButton.addEventListener("click", () => {
-  updateTemperatures("F");
-});
-
-celsiusButton.addEventListener("click", () => {
-  updateTemperatures("C");
-});
-
-const timeElement = document.querySelector(".time");
-const dateElement = document.querySelector(".date");
-const firstDayElement = document.querySelector(".first-day");
-const secondDayElement = document.querySelector(".second-day");
-const lastDayElement = document.querySelector(".last-day");
-
-function setCurrentTime() {
-  const currentDate = new Date();
-
-  const currentTimeString = currentDate.toLocaleTimeString().slice(0, 5);
-
-  const currentDayOfMonth = currentDate.getDate();
-  const currentMonthString = MONTHS_COLLECTION[currentDate.getMonth()];
-  const currentDayOfWeekString = DAY_OF_WEEK_COLLECTION[
-    currentDate.getDay()
-  ].slice(0, 3);
-
-  const currentFirstDay =
-    DAY_OF_WEEK_COLLECTION[(currentDate.getDay() + 1) % 7];
-  const currentSecondDay =
-    DAY_OF_WEEK_COLLECTION[(currentDate.getDay() + 2) % 7];
-  const currentLastDay = DAY_OF_WEEK_COLLECTION[(currentDate.getDay() + 3) % 7];
-
-  const currentDateString = `${currentDayOfWeekString} ${currentDayOfMonth} ${currentMonthString}`;
-
-  timeElement.textContent = currentTimeString;
-  dateElement.textContent = currentDateString;
-  firstDayElement.textContent = currentFirstDay;
-  secondDayElement.textContent = currentSecondDay;
-  lastDayElement.textContent = currentLastDay;
-}
-
-setCurrentTime();
-
-setInterval(setCurrentTime, 5000);
-
-async function fetchWeather(latitude, longitude) {
-  try {
-    const response = await fetch(
-      `http://localhost:3000/?latitude=${latitude}&longitude=${longitude}`
+  setupEventListeners() {
+    this.refreshButton.addEventListener(
+      "click",
+      this.changeBackground.bind(this)
     );
 
-    if (!response.ok) {
-      throw new Error("Ошибка при получении данных о погоде");
-    }
+    this.celsiusButton.addEventListener("click", () => {
+      this.updateTemperatures("C");
+    });
 
-    const data = await response.json();
+    this.fahrenheitButton.addEventListener("click", () => {
+      this.updateTemperatures("F");
+    });
 
-    document.querySelector(
-      ".content-info_weather__temperature h1"
-    ).textContent = `${data.fact.temp}°`;
-    document.querySelector(
-      ".weather__feels-like"
-    ).textContent = `FEELS LIKE: ${data.fact.feels_like}°`;
-    document.querySelector(".weather__condition").textContent =
-      data.fact.condition.toUpperCase();
-    document.querySelector(
-      ".weather__wind"
-    ).textContent = `WIND: ${data.fact.wind_speed} m/s`;
-    document.querySelector(
-      ".weather__humidity"
-    ).textContent = `HUMIDITY: ${data.fact.humidity}%`;
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        this.fetchWeather(latitude, longitude);
+        this.getCountryAndCity(latitude, longitude);
 
-    document.querySelector(
-      ".first-day_temp"
-    ).textContent = `${data.forecasts[0].parts.day.temp_avg}°`;
-    document.querySelector(
-      ".second-day_temp"
-    ).textContent = `${data.forecasts[1].parts.day.temp_avg}°`;
-    document.querySelector(
-      ".last-day_temp"
-    ).textContent = `${data.forecasts[2].parts.day.temp_avg}°`;
-  } catch (error) {
-    console.error("Ошибка получения погоды:", error);
+        this.successCallback(position);
+      },
+      (error) => {
+        console.error("Ошибка определения местоположения:", error);
+      }
+    );
   }
-}
 
-navigator.geolocation.getCurrentPosition(
-  (position) => {
-    const { latitude, longitude } = position.coords;
+  changeBackground() {
+    let newBackground;
 
-    fetchWeather(latitude, longitude);
-  },
-  (error) => {
+    do {
+      newBackground =
+        this.backgrounds[Math.floor(Math.random() * this.backgrounds.length)];
+    } while (newBackground === this.currentBackground);
+
+    this.sectionElement.style.backgroundImage = `url('${newBackground}')`;
+    this.currentBackground = newBackground;
+  }
+
+  updateTemperatures(unit) {
+    if (unit === "F") {
+      this.mainTemperature.textContent = `${this.toFahrenheit(
+        this.originalTemperatures.main
+      )}°`;
+      this.feelsLikeTemp.textContent = `FEELS LIKE: ${this.toFahrenheit(
+        this.originalTemperatures.feelsLike
+      )}°`;
+      this.day1Temp.textContent = `${this.toFahrenheit(
+        this.originalTemperatures.day1
+      )}°`;
+      this.day2Temp.textContent = `${this.toFahrenheit(
+        this.originalTemperatures.day2
+      )}°`;
+      this.day3Temp.textContent = `${this.toFahrenheit(
+        this.originalTemperatures.day3
+      )}°`;
+      this.fahrenheitButton.classList.add("active");
+      this.celsiusButton.classList.remove("active");
+    } else {
+      this.mainTemperature.textContent = `${this.originalTemperatures.main}°`;
+      this.feelsLikeTemp.textContent = `FEELS LIKE: ${this.originalTemperatures.feelsLike}°`;
+      this.day1Temp.textContent = `${this.originalTemperatures.day1}°`;
+      this.day2Temp.textContent = `${this.originalTemperatures.day2}°`;
+      this.day3Temp.textContent = `${this.originalTemperatures.day3}°`;
+      this.celsiusButton.classList.add("active");
+      this.fahrenheitButton.classList.remove("active");
+    }
+  }
+
+  toFahrenheit(celsius) {
+    return Math.round((celsius * 9) / 5 + 32);
+  }
+
+  toCelsius(fahrenheit) {
+    return Math.round(((fahrenheit - 32) * 5) / 9);
+  }
+
+  setCurrentTime() {
+    const currentDate = new Date();
+
+    const currentTimeString = currentDate.toLocaleTimeString().slice(0, 5);
+    const currentDayOfMonth = currentDate.getDate();
+    const currentMonthString = this.MONTHS_COLLECTION[currentDate.getMonth()];
+    const currentDayOfWeekString = this.DAY_OF_WEEK_COLLECTION[
+      currentDate.getDay()
+    ].slice(0, 3);
+
+    const currentFirstDay =
+      this.DAY_OF_WEEK_COLLECTION[(currentDate.getDay() + 1) % 7];
+    const currentSecondDay =
+      this.DAY_OF_WEEK_COLLECTION[(currentDate.getDay() + 2) % 7];
+    const currentLastDay =
+      this.DAY_OF_WEEK_COLLECTION[(currentDate.getDay() + 3) % 7];
+
+    const currentDateString = `${currentDayOfWeekString} ${currentDayOfMonth} ${currentMonthString}`;
+
+    this.timeElement.textContent = currentTimeString;
+    this.dateElement.textContent = currentDateString;
+    this.firstDayElement.textContent = currentFirstDay;
+    this.secondDayElement.textContent = currentSecondDay;
+    this.lastDayElement.textContent = currentLastDay;
+  }
+
+  async fetchWeather(latitude, longitude) {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/?latitude=${latitude}&longitude=${longitude}`
+      );
+
+      if (!response.ok) {
+        throw new Error("Ошибка при получении данных о погоде");
+      }
+
+      const data = await response.json();
+
+      this.originalTemperatures = {
+        main: data.fact.temp,
+        feelsLike: data.fact.feels_like,
+        day1: data.forecasts[0].parts.day.temp_avg,
+        day2: data.forecasts[1].parts.day.temp_avg,
+        day3: data.forecasts[2].parts.day.temp_avg,
+      };
+
+      document.querySelector(
+        ".content-info_weather__temperature h1"
+      ).textContent = `${data.fact.temp}°`;
+      document.querySelector(
+        ".weather__feels-like"
+      ).textContent = `FEELS LIKE: ${data.fact.feels_like}°`;
+      document.querySelector(".weather__condition").textContent =
+        data.fact.condition.toUpperCase();
+      document.querySelector(
+        ".weather__wind"
+      ).textContent = `WIND: ${data.fact.wind_speed} m/s`;
+      document.querySelector(
+        ".weather__humidity"
+      ).textContent = `HUMIDITY: ${data.fact.humidity}%`;
+
+      document.querySelector(
+        ".first-day_temp"
+      ).textContent = `${data.forecasts[0].parts.day.temp_avg}°`;
+      document.querySelector(
+        ".second-day_temp"
+      ).textContent = `${data.forecasts[1].parts.day.temp_avg}°`;
+      document.querySelector(
+        ".last-day_temp"
+      ).textContent = `${data.forecasts[2].parts.day.temp_avg}°`;
+    } catch (error) {
+      console.error("Ошибка получения погоды:", error);
+    }
+  }
+
+  // переименовать метод
+
+  successCallback(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    this.latitudeElement.textContent = `Latitude: ${latitude
+      .toString()
+      .slice(0, 5)
+      .replace(".", "° ")}'`;
+    this.longitudeElement.textContent = `Longitude: ${longitude
+      .toString()
+      .slice(0, 5)
+      .replace(".", "° ")}'`;
+
+    ymaps.ready(() => {
+      const map = new ymaps.Map("map", {
+        center: [latitude, longitude],
+        zoom: 10,
+      });
+
+      const placemark = new ymaps.Placemark([latitude, longitude], {
+        hintContent: "Ваше текущее местоположение",
+      });
+      map.geoObjects.add(placemark);
+
+      this.loadingText.style.display = "none";
+    });
+  }
+
+  errorCallback(error) {
     console.error("Ошибка определения местоположения:", error);
   }
-);
 
-const latitudeElement = document.querySelector(".latitude-text");
-const longitudeElement = document.querySelector(".longitude-text");
+  getCountryAndCity(latitude, longitude) {
+    ymaps.ready(() => {
+      ymaps
+        .geocode([latitude, longitude], { results: 1, lang: "en_US" })
+        .then((res) => {
+          const firstGeoObject = res.geoObjects.get(0);
 
-function successCallback(position) {
-  const latitude = position.coords.latitude;
-  const longitude = position.coords.longitude;
+          const country = firstGeoObject.getCountry();
+          const city =
+            firstGeoObject.getLocalities()[0] || "Местоположение недоступно";
 
-  const loadingText = document.querySelector(".loading-text");
-
-  latitudeElement.textContent = `Latitude: ${latitude
-    .toString()
-    .slice(0, 5)
-    .replace(".", "° ")}'`;
-  longitudeElement.textContent = `Longitude: ${longitude
-    .toString()
-    .slice(0, 5)
-    .replace(".", "° ")}'`;
-
-  ymaps.ready(function () {
-    const map = new ymaps.Map("map", {
-      center: [latitude, longitude],
-      zoom: 10,
+          document.querySelector(".place-country").textContent = country;
+          document.querySelector(".place-city").textContent = city;
+        });
     });
-
-    const placemark = new ymaps.Placemark([latitude, longitude], {
-      hintContent: "Ваше текущее местоположение",
-    });
-    map.geoObjects.add(placemark);
-
-    loadingText.style.display = "none";
-  });
+  }
 }
 
-function errorCallback(error) {
-  console.error("Ошибка определения местоположения:", error);
-}
-
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-} else {
-  console.log("Геолокация не поддерживается этим браузером.");
-}
-
-function getCountryAndCity(latitude, longitude) {
-  ymaps.ready(function () {
-    ymaps
-      .geocode([latitude, longitude], { results: 1, lang: "en_RU" })
-      .then(function (res) {
-        const firstGeoObject = res.geoObjects.get(0);
-
-        const country = firstGeoObject.getCountry();
-        const city =
-          firstGeoObject.getLocalities()[0] || "Местоположение недоступно";
-
-        document.querySelector(".place-country").textContent = country;
-        document.querySelector(".place-city").textContent = city;
-      });
-  });
-}
+const app = new WeatherApp();

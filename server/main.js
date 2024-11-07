@@ -21,7 +21,6 @@ app.get("/", async (req, res) => {
       { headers }
     );
     const json = await response.json();
-    console.log("===", json);
 
     res.send(json);
   } catch (error) {
