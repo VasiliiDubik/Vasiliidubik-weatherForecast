@@ -3,6 +3,7 @@ import TemperatureUnitToggle from "./components/TemperatureUnitToggle.js";
 import BackgroundChanger from "./components/BackgroundChanger.js";
 import TimeDisplay from "./components/TimeDisplay.js";
 import MapDisplay from "./components/MapDisplay.js";
+import WeatherIcons from "./components/WeatherIcons.js";
 
 class WeatherApp {
   constructor() {
@@ -43,11 +44,13 @@ class WeatherApp {
     this.backgroundChanger = new BackgroundChanger(this);
     this.timeDisplay = new TimeDisplay(this);
     this.mapDisplay = new MapDisplay(this);
+    this.weatherIcons = new WeatherIcons();
 
     this.setupEventListeners();
     this.backgroundChanger.changeBackground();
     this.timeDisplay.setupCurrentTime();
     setInterval(this.timeDisplay.setupCurrentTime.bind(this.timeDisplay), 5000);
+    this.weatherIcons.updateWeatherIcons();
   }
 
   setupEventListeners() {
@@ -90,6 +93,7 @@ class WeatherApp {
       };
 
       this.weatherDisplay.updateTemperatures("C");
+      this.weatherIcons.updateWeatherIcons();
     } catch (error) {
       console.error("Ошибка получения погоды:", error);
     }

@@ -207,6 +207,26 @@ body {
   margin-top: 60px;
 }
 
+#current-img {
+  width: 160px;
+  height: 100px;
+  mix-blend-mode: multiply;
+}
+
+#first-day_img,
+#second-day_img,
+#last-day_img {
+  width: 65px;
+  height: 40px;
+}
+
+.sunny-img {
+  object-fit: contain;
+  object-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .content-info_weather__temperature {
   font-size: 70px;
   color: white;
