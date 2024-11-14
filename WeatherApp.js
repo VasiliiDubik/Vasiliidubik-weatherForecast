@@ -91,10 +91,16 @@ class WeatherApp {
         day2: data.data[2].temp,
         day3: data.data[3].temp,
       };
-      console.log(this.originalTemperatures);
 
+      const weatherIconsData = {
+        currentDay: data.data[0].weather.icon,
+        firstDay: data.data[1].weather.icon,
+        secondDay: data.data[2].weather.icon,
+        lastDay: data.data[3].weather.icon,
+      };
+
+      this.weatherIcons.updateWeatherIcons(weatherIconsData);
       this.weatherDisplay.updateTemperatures("C");
-      this.weatherIcons.updateWeatherIcons();
     } catch (error) {
       console.error("Ошибка получения погоды:", error);
     }
