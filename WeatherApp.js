@@ -75,7 +75,7 @@ class WeatherApp {
   async fetchWeather(latitude, longitude) {
     try {
       const response = await fetch(
-        `http://localhost:3000/?latitude=${latitude}&longitude=${longitude}`
+        `https://api.weatherbit.io/v2.0/forecast/daily?lat=${latitude}&lon=${longitude}&key=01d210c51fcc4941af39f9056f62809c`
       );
 
       if (!response.ok) {
@@ -85,12 +85,13 @@ class WeatherApp {
       const data = await response.json();
 
       this.originalTemperatures = {
-        main: data.fact.temp,
-        feelsLike: data.fact.feels_like,
-        day1: data.forecasts[0].parts.day.temp_avg,
-        day2: data.forecasts[1].parts.day.temp_avg,
-        day3: data.forecasts[2].parts.day.temp_avg,
+        main: data.data[0].temp,
+        feelsLike: data.data[0].app_max_temp,
+        day1: data.data[1].temp,
+        day2: data.data[2].temp,
+        day3: data.data[3].temp,
       };
+      console.log(this.originalTemperatures);
 
       this.weatherDisplay.updateTemperatures("C");
       this.weatherIcons.updateWeatherIcons();
