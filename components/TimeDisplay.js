@@ -3,6 +3,8 @@ class TimeDisplay {
     this.app = app;
     this.timeElement = document.querySelector(".time");
     this.dateElement = document.querySelector(".date");
+
+    this.setupCurrentTime();
   }
 
   setupCurrentTime() {

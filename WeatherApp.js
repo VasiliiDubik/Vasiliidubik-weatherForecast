@@ -4,12 +4,14 @@ import BackgroundChanger from "./components/BackgroundChanger.js";
 import TimeDisplay from "./components/TimeDisplay.js";
 import MapDisplay from "./components/MapDisplay.js";
 import WeatherIcons from "./components/WeatherIcons.js";
+import LanguageToggle from "./components/LanguageToggle.js";
 
 class WeatherApp {
   constructor() {
     this.backgrounds = ["./img/bg1.png", "./img/bg2.png", "./img/bg3.png"];
     this.sectionElement = document.querySelector(".section");
     this.refreshButton = document.querySelector(".refresh-button");
+    this.location = {};
 
     this.MONTHS_COLLECTION = {
       0: "January",
@@ -45,6 +47,7 @@ class WeatherApp {
     this.timeDisplay = new TimeDisplay(this);
     this.mapDisplay = new MapDisplay(this);
     this.weatherIcons = new WeatherIcons();
+    this.languageToggle = new LanguageToggle(this);
 
     this.setupEventListeners();
     this.backgroundChanger.changeBackground();
@@ -62,6 +65,7 @@ class WeatherApp {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
+        this.location = { latitude, longitude };
         this.mapDisplay.successCallback(position);
         this.mapDisplay.getCountryAndCity(latitude, longitude);
         this.fetchWeather(latitude, longitude);
@@ -73,6 +77,8 @@ class WeatherApp {
   }
 
   async fetchWeather(latitude, longitude) {
+    console.log("===fetchWeather", latitude, longitude);
+
     try {
       const response = await fetch(
         `https://api.weatherbit.io/v2.0/forecast/daily?lat=${latitude}&lon=${longitude}&key=01d210c51fcc4941af39f9056f62809c`
@@ -83,6 +89,7 @@ class WeatherApp {
       }
 
       const data = await response.json();
+      console.log("===data", data);
 
       this.originalTemperatures = {
         main: data.data[0].temp,
