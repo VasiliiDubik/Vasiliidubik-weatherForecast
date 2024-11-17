@@ -5,6 +5,7 @@ import TimeDisplay from "./components/TimeDisplay.js";
 import MapDisplay from "./components/MapDisplay.js";
 import WeatherIcons from "./components/WeatherIcons.js";
 import LanguageToggle from "./components/LanguageToggle.js";
+import Search from "./components/Search.js";
 
 class WeatherApp {
   constructor() {
@@ -48,6 +49,7 @@ class WeatherApp {
     this.mapDisplay = new MapDisplay(this);
     this.weatherIcons = new WeatherIcons();
     this.languageToggle = new LanguageToggle(this);
+    this.search = new Search(this);
 
     this.setupEventListeners();
     this.backgroundChanger.changeBackground();
@@ -89,7 +91,6 @@ class WeatherApp {
       }
 
       const data = await response.json();
-      console.log("===data", data);
 
       this.originalTemperatures = {
         main: data.data[0].temp,
