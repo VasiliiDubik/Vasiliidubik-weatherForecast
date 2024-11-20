@@ -8,6 +8,8 @@ class WeatherDisplay {
     this.day1Temp = document.querySelector(".first-day_temp");
     this.day2Temp = document.querySelector(".second-day_temp");
     this.day3Temp = document.querySelector(".last-day_temp");
+    this.weatherWind = document.querySelector(".weather__wind");
+    this.weatherHumidity = document.querySelector(".weather__humidity");
   }
 
   updateTemperatures(unit) {
@@ -39,6 +41,8 @@ class WeatherDisplay {
       this.day2Temp.textContent = `${this.app.originalTemperatures.day2}°`;
       this.day3Temp.textContent = `${this.app.originalTemperatures.day3}°`;
     }
+    this.weatherWind.textContent = `Wind Speed: ${this.app.originalTemperatures.wind} m/s`;
+    this.weatherHumidity.textContent = `Humidity: ${this.app.originalTemperatures.humidity}%`;
   }
 
   toFahrenheit(celsius) {

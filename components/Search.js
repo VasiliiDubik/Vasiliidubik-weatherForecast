@@ -45,6 +45,7 @@ class Search {
       ).textContent = `longitude: ${lon.toFixed(2)}°`;
 
       this.app.fetchWeather(lat, lon);
+      this.app.mapDisplay.getCountryAndCity(lat, lon);
     } catch (error) {
       console.error("Error fetching city coordinates:", error);
       alert("Failed to fetch city coordinates. Please try again later.");

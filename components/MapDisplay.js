@@ -4,6 +4,9 @@ class MapDisplay {
     this.latitudeElement = document.querySelector(".latitude-text");
     this.longitudeElement = document.querySelector(".longitude-text");
     this.loadingText = document.querySelector(".loading-text");
+
+    this.map = null;
+    this.placemark = null;
   }
 
   successCallback(position) {
@@ -20,15 +23,20 @@ class MapDisplay {
       .replace(".", "° ")}'`;
 
     ymaps.ready(() => {
-      const map = new ymaps.Map("map", {
-        center: [latitude, longitude],
-        zoom: 10,
-      });
+      if (!this.map) {
+        this.map = new ymaps.Map("map", {
+          center: [latitude, longitude],
+          zoom: 10,
+        });
 
-      const placemark = new ymaps.Placemark([latitude, longitude], {
-        hintContent: "Ваше текущее местоположение",
-      });
-      map.geoObjects.add(placemark);
+        this.placemark = new ymaps.Placemark([latitude, longitude], {
+          hintContent: "Ваше текущее местоположение",
+        });
+        this.map.geoObjects.add(this.placemark);
+      } else {
+        this.map.setCenter([latitude, longitude]);
+        this.placemark.geometry.setCoordinates([latitude, longitude]);
+      }
 
       this.loadingText.style.display = "none";
     });
@@ -50,6 +58,9 @@ class MapDisplay {
 
           document.querySelector(".place-country").textContent = country;
           document.querySelector(".place-city").textContent = city;
+
+          this.map.setCenter([latitude, longitude]);
+          this.placemark.geometry.setCoordinates([latitude, longitude]);
         });
     });
   }

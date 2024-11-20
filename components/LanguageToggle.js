@@ -77,8 +77,13 @@ class LanguageToggle {
     this.weatherCondition.textContent = `${translations.overcast}`;
     this.weatherFeelsLike.textContent = `${translations.feelsLike}: ${this.app.originalTemperatures?.feelsLike}°`;
 
-    this.weatherWind.textContent = `${translations.wind}: ${this.app.originalWeather?.wind} m/s`;
-    this.weatherHumidity.textContent = `${translations.humidity}: ${this.app.originalWeather?.humidity}%`;
+    this.weatherWind.textContent = `${translations.wind}: ${
+      this.app.originalTemperatures?.wind || "N/A"
+    } m/s`;
+
+    this.weatherHumidity.textContent = `${translations.humidity}: ${
+      this.app.originalTemperatures?.humidity || "N/A"
+    }%`;
 
     if (this.app.location.latitude && this.app.location.longitude) {
       this.latit.textContent = `${
