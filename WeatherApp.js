@@ -68,7 +68,7 @@ class WeatherApp {
       (position) => {
         const { latitude, longitude } = position.coords;
         this.location = { latitude, longitude };
-        this.mapDisplay.successCallback(position);
+        this.mapDisplay.updateLocation(position);
         this.mapDisplay.getCountryAndCity(latitude, longitude);
         this.fetchWeather(latitude, longitude);
       },

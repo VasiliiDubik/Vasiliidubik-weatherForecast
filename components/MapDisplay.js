@@ -9,7 +9,7 @@ class MapDisplay {
     this.placemark = null;
   }
 
-  successCallback(position) {
+  updateLocation(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
