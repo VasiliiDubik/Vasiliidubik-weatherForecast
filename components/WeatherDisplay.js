@@ -41,7 +41,7 @@ class WeatherDisplay {
       this.day2Temp.textContent = `${this.app.originalTemperatures.day2}°`;
       this.day3Temp.textContent = `${this.app.originalTemperatures.day3}°`;
     }
-    this.weatherWind.textContent = `Wind Speed: ${this.app.originalTemperatures.wind} m/s`;
+    this.weatherWind.textContent = `Wind Speed: ${this.app.originalTemperatures.wind}m/s`;
     this.weatherHumidity.textContent = `Humidity: ${this.app.originalTemperatures.humidity}%`;
   }
 

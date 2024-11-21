@@ -12,6 +12,7 @@ class LanguageToggle {
     this.firstDaylang = document.querySelector(".first-day");
     this.secondDaylang = document.querySelector(".second-day");
     this.lastDaylang = document.querySelector(".last-day");
+    this.dateElement = document.querySelector(".date");
 
     this.translations = {
       en: {
@@ -30,6 +31,20 @@ class LanguageToggle {
           5: "Friday",
           6: "Saturday",
         },
+        months: {
+          0: "January",
+          1: "February",
+          2: "March",
+          3: "April",
+          4: "May",
+          5: "June",
+          6: "July",
+          7: "August",
+          8: "September",
+          9: "October",
+          10: "November",
+          11: "December",
+        },
       },
       ru: {
         overcast: "ПАСМУРНО",
@@ -46,6 +61,20 @@ class LanguageToggle {
           4: "Четверг",
           5: "Пятница",
           6: "Суббота",
+        },
+        months: {
+          0: "Январь",
+          1: "Февраль",
+          2: "Март",
+          3: "Апрель",
+          4: "Май",
+          5: "Июнь",
+          6: "Июль",
+          7: "Август",
+          8: "Сентябрь",
+          9: "Октябрь",
+          10: "Ноябрь",
+          11: "Декабрь",
         },
       },
     };
@@ -84,6 +113,12 @@ class LanguageToggle {
     this.weatherHumidity.textContent = `${translations.humidity}: ${
       this.app.originalTemperatures?.humidity || "N/A"
     }%`;
+
+    const currentDate = new Date();
+    const dayOfWeek = translations.days[currentDate.getDay()];
+    const dayOfMonth = currentDate.getDate();
+    const month = translations.months[currentDate.getMonth()];
+    this.dateElement.textContent = `${dayOfWeek} ${dayOfMonth} ${month}`;
 
     if (this.app.location.latitude && this.app.location.longitude) {
       this.latit.textContent = `${

@@ -114,6 +114,16 @@ class WeatherApp {
       console.error("Ошибка получения погоды:", error);
     }
   }
+  updateDate() {
+    const currentDate = new Date();
+    const dayOfWeek = this.DAY_OF_WEEK_COLLECTION[currentDate.getDay()];
+    const dayOfMonth = currentDate.getDate();
+    const month = this.MONTHS_COLLECTION[currentDate.getMonth()];
+    const dateString = `${dayOfWeek} ${dayOfMonth} ${month}`;
+
+    const dateElement = document.querySelector(".date");
+    dateElement.textContent = dateString;
+  }
 }
 
 export default WeatherApp;

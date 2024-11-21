@@ -5,11 +5,17 @@ class TimeDisplay {
     this.dateElement = document.querySelector(".date");
 
     this.setupCurrentTime();
+    this.setupCurrentDate();
   }
 
   setupCurrentTime() {
     const currentDate = new Date();
     const currentTimeString = currentDate.toLocaleTimeString().slice(0, 5);
+    this.timeElement.textContent = currentTimeString;
+  }
+
+  setupCurrentDate() {
+    const currentDate = new Date();
     const currentDayOfMonth = currentDate.getDate();
     const currentMonthString =
       this.app.MONTHS_COLLECTION[currentDate.getMonth()];
@@ -18,7 +24,6 @@ class TimeDisplay {
     ].slice(0, 3);
     const currentDateString = `${currentDayOfWeekString} ${currentDayOfMonth} ${currentMonthString}`;
 
-    this.timeElement.textContent = currentTimeString;
     this.dateElement.textContent = currentDateString;
   }
 }
