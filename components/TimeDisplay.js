@@ -4,18 +4,17 @@ class TimeDisplay {
     this.timeElement = document.querySelector(".time");
     this.dateElement = document.querySelector(".date");
 
-    this.setupCurrentTime();
-    this.setupCurrentDate();
+    const currentDate = new Date();
+    this.setTime(currentDate);
+    this.setDate(currentDate);
   }
 
-  setupCurrentTime() {
-    const currentDate = new Date();
+  setTime(currentDate) {
     const currentTimeString = currentDate.toLocaleTimeString().slice(0, 5);
     this.timeElement.textContent = currentTimeString;
   }
 
-  setupCurrentDate() {
-    const currentDate = new Date();
+  setDate(currentDate) {
     const currentDayOfMonth = currentDate.getDate();
     const currentMonthString =
       this.app.MONTHS_COLLECTION[currentDate.getMonth()];
