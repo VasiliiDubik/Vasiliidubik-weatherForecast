@@ -1,9 +1,9 @@
 class WeatherIcons {
   constructor() {
-    this.weatherIconCurrent = document.getElementById("current-img");
-    this.weatherIconFirstDay = document.getElementById("first-day_img");
-    this.weatherIconSecondDay = document.getElementById("second-day_img");
-    this.weatherIconLastDay = document.getElementById("last-day_img");
+    this.weatherIconCurrent = document.querySelector(".current-img");
+    this.weatherIconFirstDay = document.querySelector(".first-day_img");
+    this.weatherIconSecondDay = document.querySelector(".second-day_img");
+    this.weatherIconLastDay = document.querySelector(".last-day_img");
   }
 
   getWeatherIconUrl(iconCode) {

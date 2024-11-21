@@ -211,15 +211,15 @@ body {
 .content-info_place__date {
   width: 50%;
 }
-#current-img {
+.current-img {
   width: 160px;
   height: 100px;
   mix-blend-mode: multiply;
 }
 
-#first-day_img,
-#second-day_img,
-#last-day_img {
+.first-day_img,
+.second-day_img,
+.last-day_img {
   width: 65px;
   height: 40px;
 }
