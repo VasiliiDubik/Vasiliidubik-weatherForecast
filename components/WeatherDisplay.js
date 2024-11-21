@@ -18,28 +18,32 @@ class WeatherDisplay {
       return;
     }
 
-    if (unit === "F") {
-      this.mainTemperature.textContent = `${this.toFahrenheit(
-        this.app.originalTemperatures.main
-      )}°`;
-      this.feelsLikeTemp.textContent = `FEELS LIKE: ${this.toFahrenheit(
-        this.app.originalTemperatures.feelsLike
-      )}°`;
-      this.day1Temp.textContent = `${this.toFahrenheit(
-        this.app.originalTemperatures.day1
-      )}°`;
-      this.day2Temp.textContent = `${this.toFahrenheit(
-        this.app.originalTemperatures.day2
-      )}°`;
-      this.day3Temp.textContent = `${this.toFahrenheit(
-        this.app.originalTemperatures.day3
-      )}°`;
-    } else {
-      this.mainTemperature.textContent = `${this.app.originalTemperatures.main}°`;
-      this.feelsLikeTemp.textContent = `FEELS LIKE: ${this.app.originalTemperatures.feelsLike}°`;
-      this.day1Temp.textContent = `${this.app.originalTemperatures.day1}°`;
-      this.day2Temp.textContent = `${this.app.originalTemperatures.day2}°`;
-      this.day3Temp.textContent = `${this.app.originalTemperatures.day3}°`;
+    switch (unit) {
+      case "F":
+        this.mainTemperature.textContent = `${this.toFahrenheit(
+          this.app.originalTemperatures.main
+        )}°`;
+        this.feelsLikeTemp.textContent = `FEELS LIKE: ${this.toFahrenheit(
+          this.app.originalTemperatures.feelsLike
+        )}°`;
+        this.day1Temp.textContent = `${this.toFahrenheit(
+          this.app.originalTemperatures.day1
+        )}°`;
+        this.day2Temp.textContent = `${this.toFahrenheit(
+          this.app.originalTemperatures.day2
+        )}°`;
+        this.day3Temp.textContent = `${this.toFahrenheit(
+          this.app.originalTemperatures.day3
+        )}°`;
+        break;
+      case "C":
+      default:
+        this.mainTemperature.textContent = `${this.app.originalTemperatures.main}°`;
+        this.feelsLikeTemp.textContent = `FEELS LIKE: ${this.app.originalTemperatures.feelsLike}°`;
+        this.day1Temp.textContent = `${this.app.originalTemperatures.day1}°`;
+        this.day2Temp.textContent = `${this.app.originalTemperatures.day2}°`;
+        this.day3Temp.textContent = `${this.app.originalTemperatures.day3}°`;
+        break;
     }
     this.weatherWind.textContent = `Wind Speed: ${this.app.originalTemperatures.wind}m/s`;
     this.weatherHumidity.textContent = `Humidity: ${this.app.originalTemperatures.humidity}%`;
