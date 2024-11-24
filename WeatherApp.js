@@ -53,8 +53,13 @@ class WeatherApp {
 
     this.setupEventListeners();
     this.backgroundChanger.changeBackground();
-    this.timeDisplay.setupCurrentTime();
-    setInterval(this.timeDisplay.setupCurrentTime.bind(this.timeDisplay), 5000);
+    this.timeDisplay.setTime(new Date());
+    this.timeDisplay.setDate(new Date());
+    setInterval(() => {
+      const currentDate = new Date();
+      this.timeDisplay.setTime(currentDate);
+      this.timeDisplay.setDate(currentDate);
+    }, 5000);
     this.weatherIcons.updateWeatherIcons();
   }
 

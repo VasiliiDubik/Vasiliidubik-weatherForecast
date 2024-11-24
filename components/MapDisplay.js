@@ -9,18 +9,20 @@ class MapDisplay {
     this.placemark = null;
   }
 
+  formatCoordinates(coordinates) {
+    return coordinates.toString().slice(0, 5).replace(".", "° ");
+  }
+
   updateLocation(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
-    this.latitudeElement.textContent = `Latitude: ${latitude
-      .toString()
-      .slice(0, 5)
-      .replace(".", "° ")}'`;
-    this.longitudeElement.textContent = `Longitude: ${longitude
-      .toString()
-      .slice(0, 5)
-      .replace(".", "° ")}'`;
+    this.latitudeElement.textContent = `Latitude: ${this.formatCoordinates(
+      latitude
+    )}'`;
+    this.longitudeElement.textContent = `Longitude: ${this.formatCoordinates(
+      longitude
+    )}'`;
 
     ymaps.ready(() => {
       if (!this.map) {

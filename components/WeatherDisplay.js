@@ -13,7 +13,7 @@ class WeatherDisplay {
   }
 
   updateTemperatures(unit) {
-    if (!this.app.originalTemperatures.main) {
+    if (!this.app.originalTemperatures) {
       console.error("Температуры не загружены");
       return;
     }
