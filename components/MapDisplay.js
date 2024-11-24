@@ -1,6 +1,7 @@
 class MapDisplay {
   constructor(app) {
     this.app = app;
+
     this.latitudeElement = document.querySelector(".latitude-text");
     this.longitudeElement = document.querySelector(".longitude-text");
     this.loadingText = document.querySelector(".loading-text");

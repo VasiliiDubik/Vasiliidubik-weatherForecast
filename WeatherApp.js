@@ -94,7 +94,6 @@ class WeatherApp {
       }
 
       const data = await response.json();
-      console.log(data);
 
       this.originalTemperatures = {
         main: data.data[0].temp,
