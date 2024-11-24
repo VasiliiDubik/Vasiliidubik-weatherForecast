@@ -173,14 +173,14 @@ body {
 .content {
   margin-top: 60px;
   display: flex;
-  gap: 70px;
+  gap: 40px;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 
 .content-info {
-  width: 580px;
-  height: 560px;
+  /* width: 580px; */
+  /* height: 560px; */
 }
 
 .date-time {
@@ -209,7 +209,7 @@ body {
   margin-top: 60px;
 }
 .content-info_place__date {
-  width: 50%;
+  /* width: 50%; */
 }
 .current-img {
   width: 160px;
@@ -311,5 +311,15 @@ body {
   .content {
     align-items: center;
     justify-content: center;
+  }
+
+  .place {
+    text-align: center;
+  }
+
+  .date-time {
+    text-align: center;
+    justify-content: center;
+    margin-top: 25px;
   }
 }

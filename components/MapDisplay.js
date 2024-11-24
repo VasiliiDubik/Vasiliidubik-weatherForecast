@@ -42,7 +42,7 @@ class MapDisplay {
     });
   }
 
-  errorCallback(error) {
+  handleLocationError(error) {
     console.error("Ошибка определения местоположения:", error);
   }
 
