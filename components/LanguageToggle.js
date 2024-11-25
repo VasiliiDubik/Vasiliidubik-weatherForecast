@@ -1,6 +1,7 @@
 class LanguageToggle {
   constructor(app) {
     this.app = app;
+    this.mapDisplay = app.mapDisplay;
     this.langButton = document.querySelector(".lang-en");
     this.weatherCondition = document.querySelector(".weather__condition");
     this.weatherFeelsLike = document.querySelector(".weather__feels-like");
@@ -117,18 +118,15 @@ class LanguageToggle {
     this.dateElement.textContent = this.getCurrentDateText(translations);
 
     if (this.app.location.latitude && this.app.location.longitude) {
-      this.latit.textContent = `${
-        translations.latitude
-      }: ${this.app.location.latitude
-        .toString()
-        .slice(0, 5)
-        .replace(".", "° ")}`;
-      this.langit.textContent = `${
-        translations.longitude
-      }: ${this.app.location.longitude
-        .toString()
-        .slice(0, 5)
-        .replace(".", "° ")}`;
+      const formattedLatitude = this.mapDisplay.formatCoordinates(
+        this.app.location.latitude
+      );
+      const formattedLongitude = this.mapDisplay.formatCoordinates(
+        this.app.location.longitude
+      );
+
+      this.latit.textContent = `${translations.latitude}: ${formattedLatitude}`;
+      this.langit.textContent = `${translations.longitude}: ${formattedLongitude}`;
     }
 
     const firstDayIndex = this.getDayOfWeekIndex(1);
