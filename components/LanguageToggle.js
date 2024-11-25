@@ -92,10 +92,8 @@ class LanguageToggle {
   switchLanguage() {
     if (this.currentLanguage === "en") {
       this.currentLanguage = "ru";
-      this.langButton.textContent = "RU";
     } else {
       this.currentLanguage = "en";
-      this.langButton.textContent = "EN";
     }
 
     this.updateLanguageText();
@@ -114,6 +112,8 @@ class LanguageToggle {
     this.weatherHumidity.textContent = `${translations.humidity}: ${
       this.app.originalTemperatures?.humidity || "N/A"
     }%`;
+
+    this.langButton.textContent = this.currentLanguage === "en" ? "RU" : "EN";
 
     this.dateElement.textContent = this.getCurrentDateText(translations);
 
