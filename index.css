@@ -18,7 +18,6 @@ body {
 
 .section {
   position: relative;
-  z-index: 2;
   margin: auto;
   width: 100vw;
   min-height: 100vh;
@@ -36,7 +35,6 @@ body {
   width: 100%;
   height: 100%;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-  z-index: 1;
   pointer-events: none;
 }
 
@@ -173,14 +171,9 @@ body {
 .content {
   margin-top: 60px;
   display: flex;
-  gap: 40px;
+  gap: 50px;
   justify-content: space-between;
   flex-wrap: wrap;
-}
-
-.content-info {
-  /* width: 580px; */
-  /* height: 560px; */
 }
 
 .date-time {
@@ -208,9 +201,7 @@ body {
   display: flex;
   margin-top: 60px;
 }
-.content-info_place__date {
-  /* width: 50%; */
-}
+
 .current-img {
   width: 160px;
   height: 100px;
