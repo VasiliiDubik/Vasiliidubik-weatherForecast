@@ -114,11 +114,7 @@ class LanguageToggle {
       this.app.originalTemperatures?.humidity || "N/A"
     }%`;
 
-    const currentDate = new Date();
-    const dayOfWeek = translations.days[currentDate.getDay()];
-    const dayOfMonth = currentDate.getDate();
-    const month = translations.months[currentDate.getMonth()];
-    this.dateElement.textContent = `${dayOfWeek} ${dayOfMonth} ${month}`;
+    this.dateElement.textContent = this.getCurrentDateText(translations);
 
     if (this.app.location.latitude && this.app.location.longitude) {
       this.latit.textContent = `${
@@ -143,6 +139,15 @@ class LanguageToggle {
     this.secondDaylang.textContent = translations.days[secondDayIndex];
     this.lastDaylang.textContent = translations.days[lastDayIndex];
   }
+
+  getCurrentDateText(translations) {
+    const currentDate = new Date();
+    const dayOfWeek = translations.days[currentDate.getDay()];
+    const dayOfMonth = currentDate.getDate();
+    const month = translations.months[currentDate.getMonth()];
+    return `${dayOfWeek} ${dayOfMonth} ${month}`;
+  }
+
   getDayOfWeekIndex(value) {
     const currentDayIndex = new Date().getDay();
 
