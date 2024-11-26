@@ -1,4 +1,5 @@
 import LocationService from "../services/locationService.js";
+import MapService from "../services/mapService.js";
 
 class MapDisplay {
   constructor(app) {
@@ -28,19 +29,10 @@ class MapDisplay {
     )}'`;
 
     ymaps.ready(() => {
-      if (!this.map) {
-        this.map = new ymaps.Map("map", {
-          center: [latitude, longitude],
-          zoom: 10,
-        });
-
-        this.placemark = new ymaps.Placemark([latitude, longitude], {
-          hintContent: "Ваше текущее местоположение",
-        });
-        this.map.geoObjects.add(this.placemark);
+      if (!MapService.map) {
+        MapService.initializeMap("map", latitude, longitude);
       } else {
-        this.map.setCenter([latitude, longitude]);
-        this.placemark.geometry.setCoordinates([latitude, longitude]);
+        MapService.updateMap(latitude, longitude);
       }
 
       LocationService.getCountryAndCity(latitude, longitude)
