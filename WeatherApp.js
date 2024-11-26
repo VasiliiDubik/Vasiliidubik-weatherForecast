@@ -1,3 +1,7 @@
+import {
+  MONTHS_COLLECTION,
+  DAY_OF_WEEK_COLLECTION,
+} from "./components/constants/collections.js";
 import WeatherDisplay from "./components/WeatherDisplay.js";
 import TemperatureUnitToggle from "./components/TemperatureUnitToggle.js";
 import BackgroundChanger from "./components/BackgroundChanger.js";
@@ -14,31 +18,8 @@ class WeatherApp {
     this.sectionElement = document.querySelector(".section");
     this.refreshButton = document.querySelector(".refresh-button");
     this.location = {};
-
-    this.MONTHS_COLLECTION = {
-      0: "January",
-      1: "February",
-      2: "March",
-      3: "April",
-      4: "May",
-      5: "June",
-      6: "July",
-      7: "August",
-      8: "September",
-      9: "October",
-      10: "November",
-      11: "December",
-    };
-
-    this.DAY_OF_WEEK_COLLECTION = {
-      0: "Sunday",
-      1: "Monday",
-      2: "Tuesday",
-      3: "Wednesday",
-      4: "Thursday",
-      5: "Friday",
-      6: "Saturday",
-    };
+    this.MONTHS_COLLECTION = MONTHS_COLLECTION;
+    this.DAY_OF_WEEK_COLLECTION = DAY_OF_WEEK_COLLECTION;
 
     this.currentBackground = null;
     this.originalTemperatures = {};
@@ -123,6 +104,8 @@ class WeatherApp {
   updateDate() {
     const currentDate = new Date();
     const dayOfWeek = this.DAY_OF_WEEK_COLLECTION[currentDate.getDay()];
+    console.log(dayOfWeek);
+
     const dayOfMonth = currentDate.getDate();
     const month = this.MONTHS_COLLECTION[currentDate.getMonth()];
     const dateString = `${dayOfWeek} ${dayOfMonth} ${month}`;
