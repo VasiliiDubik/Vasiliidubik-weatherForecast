@@ -6,6 +6,7 @@ import MapDisplay from "./components/MapDisplay.js";
 import WeatherIcons from "./components/WeatherIcons.js";
 import LanguageToggle from "./components/LanguageToggle.js";
 import Search from "./components/Search.js";
+import translations from "./translations/EN_RU.js";
 
 class WeatherApp {
   constructor() {
@@ -41,6 +42,7 @@ class WeatherApp {
 
     this.currentBackground = null;
     this.originalTemperatures = {};
+    this.translations = translations;
 
     this.weatherDisplay = new WeatherDisplay(this);
     this.temperatureUnitToggle = new TemperatureUnitToggle(this);
