@@ -1,7 +1,7 @@
 import {
   MONTHS_COLLECTION,
   DAY_OF_WEEK_COLLECTION,
-} from "./components/constants/collections.js";
+} from "./constants/collections.js";
 import WeatherDisplay from "./components/WeatherDisplay.js";
 import TemperatureUnitToggle from "./components/TemperatureUnitToggle.js";
 import BackgroundChanger from "./components/BackgroundChanger.js";
@@ -9,7 +9,7 @@ import TimeDisplay from "./components/TimeDisplay.js";
 import MapDisplay from "./components/MapDisplay.js";
 import WeatherIcons from "./components/WeatherIcons.js";
 import LanguageToggle from "./components/LanguageToggle.js";
-import Search from "./components/Search.js";
+import Search from "./services/searchService.js";
 import translations from "./translations/EN_RU.js";
 
 class WeatherApp {

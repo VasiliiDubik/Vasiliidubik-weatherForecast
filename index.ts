@@ -5,7 +5,7 @@ import TimeDisplay from "./components/TimeDisplay.js";
 import MapDisplay from "./components/MapDisplay.js";
 import WeatherIcons from "./components/WeatherIcons.js";
 import LanguageToggle from "./components/LanguageToggle.js";
-import Search from "./components/Search.js";
+import Search from "./services/searchService.js";
 
 interface Location {
   latitude: number;
