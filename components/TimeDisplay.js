@@ -1,8 +1,8 @@
 class TimeDisplay {
   constructor(app) {
     this.app = app;
-    this.timeElement = document.querySelector(".time");
-    this.dateElement = document.querySelector(".date");
+    this.timeElement = document.querySelector(".forecast-block__time");
+    this.dateElement = document.querySelector(".forecast-block__date-value");
 
     const currentDate = new Date();
     this.setTime(currentDate);

@@ -14,59 +14,65 @@
   <body>
     <section class="section">
       <div class="container">
-        <div class="navigation-panel">
-          <div class="button-panel">
+        <div class="header">
+          <div class="header__controls">
             <button class="refresh-button"></button>
-            <div class="lang-box">
-              <button class="lang-en">EN</button>
+            <div class="language-select">
+              <button class="language-select__button">EN</button>
             </div>
-            <div class="temperature-box">
-              <button class="fahrenheit">°F</button>
-              <button class="celsius active">°C</button>
+            <div class="temperature-switcher">
+              <button class="temperature-switcher__button_fahrenheit">
+                °F
+              </button>
+              <button class="temperature-switcher__button_celsius active">
+                °C
+              </button>
             </div>
 
-            <div class="search-panel">
+            <div class="search-block">
               <input
                 type="text"
-                class="search-input"
+                class="search-block__input"
                 placeholder="Search city or ZIP"
               />
-              <button class="search-button">SEARCH</button>
+              <button class="search-block__button">SEARCH</button>
             </div>
           </div>
         </div>
-        <div class="content">
-          <div class="content-info">
-            <div class="content-info_place__date">
-              <div class="place">
-                <h1 class="place-city">MINSK</h1>
-                <h1 class="place-country">Belarus</h1>
+        <div class="main">
+          <div class="forecast-block">
+            <div class="forecast-block__position-and-date">
+              <div class="forecast-block__position">
+                <h1 class="forecast-block__city">MINSK</h1>
+                <h1 class="forecast-block__country">Belarus</h1>
               </div>
-              <div class="date-time">
-                <h3 class="date">Mon 28 October</h3>
-                <h3 class="time">17:23</h3>
+              <div class="forecast-block__date">
+                <h3 class="forecast-block__date-value">Mon 28 October</h3>
+                <h3 class="forecast-block__time">17:23</h3>
               </div>
-              <div class="content-info_weather">
-                <div class="content-info_weather__temperature">
-                  <h1 class="current-temp_content">10°</h1>
+              <div class="weather-today">
+                <div class="weather-today__main-temperature">
+                  <h1 class="weather-today__temperature-value">10°</h1>
                 </div>
 
-                <div class="content-info_weather__img">
-                  <img class="current-img" src="./img/Group 26.png" alt="" />
+                <div class="weather-today__icon">
+                  <img class="weather-today__image" src="./img/Group 26.png" />
                 </div>
 
-                <div class="content-info_weather__characteristics">
-                  <p class="weather__condition">OVERCAST</p>
-                  <p class="weather__feels-like">FEELS LIKE: 7°</p>
-                  <p class="weather__wind">WIND: 2 m/s</p>
-                  <p class="weather__humidity">HUMIDITY: 83%</p>
+                <div class="weather-today__details">
+                  <p class="weather-today__condition">OVERCAST</p>
+                  <p class="weather-today__feels-like">FEELS LIKE: 7°</p>
+                  <p class="weather-today__wind">WIND: 2 m/s</p>
+                  <p class="weather-today__humidity">HUMIDITY: 83%</p>
                 </div>
               </div>
-              <div class="weather__forecast">
-                <div class="weather__forecast-day">
-                  <p class="weather__forecast-day-name first-day">Tuesday</p>
-                  <div class="weather__forecast-day-wrap">
-                    <p class="weather__forecast-temp first-day_temp">7°</p>
+              <div class="weather-future">
+                <div class="weather-future__day">
+                  <p class="weather-future__day-name first-day">Tuesday</p>
+                  <div class="weather-future__day-wrap">
+                    <p class="weather-future__day-temperature first-day_temp">
+                      7°
+                    </p>
                     <img
                       src="./img/cloud.png"
                       alt="Cloudy"
@@ -74,10 +80,12 @@
                     />
                   </div>
                 </div>
-                <div class="weather__forecast-day">
-                  <p class="weather__forecast-day-name second-day">Wednesday</p>
-                  <div class="weather__forecast-day-wrap">
-                    <p class="weather__forecast-temp second-day_temp">6°</p>
+                <div class="weather-future__day">
+                  <p class="weather-future__day-name second-day">Wednesday</p>
+                  <div class="weather-future__day-wrap">
+                    <p class="weather-future__day-temperature second-day_temp">
+                      6°
+                    </p>
                     <img
                       src="./img/cloud.png"
                       alt="Cloudy"
@@ -85,10 +93,12 @@
                     />
                   </div>
                 </div>
-                <div class="weather__forecast-day">
-                  <p class="weather__forecast-day-name last-day">Thursday</p>
-                  <div class="weather__forecast-day-wrap">
-                    <p class="weather__forecast-temp last-day_temp">3°</p>
+                <div class="weather-future__day">
+                  <p class="weather-future__day-name last-day">Thursday</p>
+                  <div class="weather-future__day-wrap">
+                    <p class="weather-future__day-temperature last-day_temp">
+                      3°
+                    </p>
                     <img
                       src="./img/cloud.png"
                       alt="Cloudy"
@@ -99,13 +109,13 @@
               </div>
             </div>
           </div>
-          <div class="content-map">
-            <div class="loading-text">Loading location...</div>
+          <div class="map-block">
+            <div class="map-block__loading-text">Loading location...</div>
             <div id="map" class="map"></div>
 
-            <div class="latitude-langitude__wrap">
-              <h2 class="latitude-text">latitude:53° 54'</h2>
-              <h2 class="longitude-text">longitude:27° 34'</h2>
+            <div class="location">
+              <h2 class="latitude-Location__text">latitude:53° 54'</h2>
+              <h2 class="Longitude-Location__text">longitude:27° 34'</h2>
             </div>
           </div>
         </div>

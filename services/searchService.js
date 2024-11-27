@@ -1,8 +1,8 @@
 class Search {
   constructor(app) {
     this.app = app;
-    this.searchInput = document.querySelector(".search-input");
-    this.searchButton = document.querySelector(".search-button");
+    this.searchInput = document.querySelector(".search-block__input");
+    this.searchButton = document.querySelector(".search-block__button");
 
     this.setupEventListeners();
   }
@@ -38,10 +38,10 @@ class Search {
       this.app.location = { latitude: lat, longitude: lon };
 
       document.querySelector(
-        ".latitude-text"
+        ".latitude-Location__text"
       ).textContent = `latitude: ${lat.toFixed(2)}°`;
       document.querySelector(
-        ".longitude-text"
+        ".Longitude-Location__text"
       ).textContent = `longitude: ${lon.toFixed(2)}°`;
 
       this.app.fetchWeather(lat, lon);

@@ -2,14 +2,14 @@ class WeatherDisplay {
   constructor(app) {
     this.app = app;
     this.mainTemperature = document.querySelector(
-      ".content-info_weather__temperature h1"
+      ".weather-today__main-temperature h1"
     );
-    this.feelsLikeTemp = document.querySelector(".weather__feels-like");
+    this.feelsLikeTemp = document.querySelector(".weather-today__feels-like");
     this.day1Temp = document.querySelector(".first-day_temp");
     this.day2Temp = document.querySelector(".second-day_temp");
     this.day3Temp = document.querySelector(".last-day_temp");
-    this.weatherWind = document.querySelector(".weather__wind");
-    this.weatherHumidity = document.querySelector(".weather__humidity");
+    this.weatherWind = document.querySelector(".weather-today__wind");
+    this.weatherHumidity = document.querySelector(".weather-today__humidity");
   }
 
   updateTemperatures(unit) {

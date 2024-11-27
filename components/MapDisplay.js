@@ -5,9 +5,9 @@ class MapDisplay {
   constructor(app) {
     this.app = app;
 
-    this.latitudeElement = document.querySelector(".latitude-text");
-    this.longitudeElement = document.querySelector(".longitude-text");
-    this.loadingText = document.querySelector(".loading-text");
+    this.latitudeElement = document.querySelector(".latitude-Location__text");
+    this.longitudeElement = document.querySelector(".Longitude-Location__text");
+    this.loadingText = document.querySelector(".map-block__loading-text");
 
     this.map = null;
     this.placemark = null;
@@ -37,8 +37,9 @@ class MapDisplay {
 
       LocationService.getCountryAndCity(latitude, longitude)
         .then(({ country, city }) => {
-          document.querySelector(".place-country").textContent = country;
-          document.querySelector(".place-city").textContent = city;
+          document.querySelector(".forecast-block__country").textContent =
+            country;
+          document.querySelector(".forecast-block__city").textContent = city;
 
           this.map.setCenter([latitude, longitude]);
           this.placemark.geometry.setCoordinates([latitude, longitude]);

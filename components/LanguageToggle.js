@@ -3,18 +3,20 @@ class LanguageToggle {
     this.app = app;
     this.translations = app.translations;
     this.mapDisplay = app.mapDisplay;
-    this.langButton = document.querySelector(".lang-en");
-    this.weatherCondition = document.querySelector(".weather__condition");
-    this.weatherFeelsLike = document.querySelector(".weather__feels-like");
-    this.weatherWind = document.querySelector(".weather__wind");
-    this.weatherHumidity = document.querySelector(".weather__humidity");
+    this.langButton = document.querySelector(".language-select__button");
+    this.weatherCondition = document.querySelector(".weather-today__condition");
+    this.weatherFeelsLike = document.querySelector(
+      ".weather-today__feels-like"
+    );
+    this.weatherWind = document.querySelector(".weather-today__wind");
+    this.weatherHumidity = document.querySelector(".weather-today__humidity");
     this.currentLanguage = "en";
-    this.latit = document.querySelector(".latitude-text");
-    this.langit = document.querySelector(".longitude-text");
+    this.latit = document.querySelector(".latitude-Location__text");
+    this.langit = document.querySelector(".Longitude-Location__text");
     this.firstDaylang = document.querySelector(".first-day");
     this.secondDaylang = document.querySelector(".second-day");
     this.lastDaylang = document.querySelector(".last-day");
-    this.dateElement = document.querySelector(".date");
+    this.dateElement = document.querySelector(".forecast-block__date-value");
 
     this.setupEventListeners();
   }

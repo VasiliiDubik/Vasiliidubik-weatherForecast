@@ -1,8 +1,12 @@
 class TemperatureUnitToggle {
   constructor(app) {
     this.app = app;
-    this.celsiusButton = document.querySelector(".celsius");
-    this.fahrenheitButton = document.querySelector(".fahrenheit");
+    this.celsiusButton = document.querySelector(
+      ".temperature-switcher__button_celsius"
+    );
+    this.fahrenheitButton = document.querySelector(
+      ".temperature-switcher__button_fahrenheit"
+    );
     this.setupEventListeners();
   }
 

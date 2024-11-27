@@ -109,7 +109,7 @@ class WeatherApp {
     const month = this.MONTHS_COLLECTION[currentDate.getMonth()];
     const dateString = `${dayOfWeek} ${dayOfMonth} ${month}`;
 
-    const dateElement = document.querySelector(".date");
+    const dateElement = document.querySelector(".forecast-block__date-value");
     dateElement.textContent = dateString;
   }
 }

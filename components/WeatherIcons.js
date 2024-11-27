@@ -1,6 +1,6 @@
 class WeatherIcons {
   constructor() {
-    this.weatherIconCurrent = document.querySelector(".current-img");
+    this.weatherIconCurrent = document.querySelector(".weather-today__image");
     this.weatherIconFirstDay = document.querySelector(".first-day_img");
     this.weatherIconSecondDay = document.querySelector(".second-day_img");
     this.weatherIconLastDay = document.querySelector(".last-day_img");
