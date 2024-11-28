@@ -171,9 +171,13 @@ body {
 .main {
   margin-top: 60px;
   display: flex;
-  gap: 50px;
+  gap: 30px;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+.forecast-block {
+  width: 650px;
 }
 
 .forecast-block__date {
@@ -241,8 +245,7 @@ body {
 
 .weather-future {
   display: flex;
-  gap: 50px;
-  justify-content: space-between;
+  gap: 40px;
   margin-top: 80px;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
