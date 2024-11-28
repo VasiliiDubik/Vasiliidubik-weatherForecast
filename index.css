@@ -249,17 +249,17 @@ body {
   font-style: normal;
 }
 
-.weather-future__day-wrap {
+.weather-future-day__wrap {
   display: flex;
   gap: 10px;
 }
 
-.weather-future__day-name {
+.weather-future-day__name {
   color: white;
   font-size: 22px;
 }
 
-.weather-future__day-temperature {
+.weather-future-day__temperature {
   font-size: 40px;
   color: white;
 }

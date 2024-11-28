@@ -1,3 +1,8 @@
+import {
+  MONTHS_COLLECTION,
+  DAY_OF_WEEK_COLLECTION,
+} from "../constants/collections.js";
+
 class TimeDisplay {
   constructor(app) {
     this.app = app;
@@ -16,9 +21,8 @@ class TimeDisplay {
 
   setDate(currentDate) {
     const currentDayOfMonth = currentDate.getDate();
-    const currentMonthString =
-      this.app.MONTHS_COLLECTION[currentDate.getMonth()];
-    const currentDayOfWeekString = this.app.DAY_OF_WEEK_COLLECTION[
+    const currentMonthString = MONTHS_COLLECTION[currentDate.getMonth()];
+    const currentDayOfWeekString = DAY_OF_WEEK_COLLECTION[
       currentDate.getDay()
     ].slice(0, 3);
     const currentDateString = `${currentDayOfWeekString} ${currentDayOfMonth} ${currentMonthString}`;

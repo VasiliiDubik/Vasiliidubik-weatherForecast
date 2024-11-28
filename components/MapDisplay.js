@@ -1,5 +1,4 @@
-import LocationService from "../services/locationService.js";
-import MapService from "../services/mapService.js";
+import mapService from "../services/mapService.js";
 
 class MapDisplay {
   constructor(app) {
@@ -29,20 +28,20 @@ class MapDisplay {
     )}'`;
 
     ymaps.ready(() => {
-      if (!MapService.map) {
-        MapService.initializeMap("map", latitude, longitude);
+      if (!mapService.map) {
+        mapService.initializeMap("map", latitude, longitude);
       } else {
-        MapService.updateMap(latitude, longitude);
+        mapService.updateMap(latitude, longitude);
       }
 
-      LocationService.getCountryAndCity(latitude, longitude)
+      mapService
+        .getCountryAndCity(latitude, longitude)
         .then(({ country, city }) => {
           document.querySelector(".forecast-block__country").textContent =
             country;
           document.querySelector(".forecast-block__city").textContent = city;
 
-          this.map.setCenter([latitude, longitude]);
-          this.placemark.geometry.setCoordinates([latitude, longitude]);
+          mapService.updateMap(latitude, longitude);
         })
         .catch((error) => {
           console.error("Ошибка получения страны и города:", error);

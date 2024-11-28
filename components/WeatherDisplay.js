@@ -5,9 +5,15 @@ class WeatherDisplay {
       ".weather-today__main-temperature h1"
     );
     this.feelsLikeTemp = document.querySelector(".weather-today__feels-like");
-    this.day1Temp = document.querySelector(".first-day_temp");
-    this.day2Temp = document.querySelector(".second-day_temp");
-    this.day3Temp = document.querySelector(".last-day_temp");
+    this.day1Temp = document.querySelector(
+      ".weather-future-day_first .weather-future-day__temperature"
+    );
+    this.day2Temp = document.querySelector(
+      ".weather-future-day_second .weather-future-day__temperature"
+    );
+    this.day3Temp = document.querySelector(
+      ".weather-future-day_last .weather-future-day__temperature"
+    );
     this.weatherWind = document.querySelector(".weather-today__wind");
     this.weatherHumidity = document.querySelector(".weather-today__humidity");
   }

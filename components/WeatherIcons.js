@@ -11,6 +11,10 @@ class WeatherIcons {
   }
 
   updateWeatherIcons(weatherIcons) {
+    if (!weatherIcons) {
+      return;
+    }
+
     this.weatherIconCurrent.src = this.getWeatherIconUrl(
       weatherIcons.currentDay
     );

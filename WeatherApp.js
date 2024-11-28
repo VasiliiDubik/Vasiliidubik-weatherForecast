@@ -10,7 +10,6 @@ import MapDisplay from "./components/MapDisplay.js";
 import WeatherIcons from "./components/WeatherIcons.js";
 import LanguageToggle from "./components/LanguageToggle.js";
 import Search from "./services/searchService.js";
-import translations from "./translations/EN_RU.js";
 
 class WeatherApp {
   constructor() {
@@ -18,12 +17,9 @@ class WeatherApp {
     this.sectionElement = document.querySelector(".section");
     this.refreshButton = document.querySelector(".refresh-button");
     this.location = {};
-    this.MONTHS_COLLECTION = MONTHS_COLLECTION;
-    this.DAY_OF_WEEK_COLLECTION = DAY_OF_WEEK_COLLECTION;
 
     this.currentBackground = null;
     this.originalTemperatures = {};
-    this.translations = translations;
 
     this.weatherDisplay = new WeatherDisplay(this);
     this.temperatureUnitToggle = new TemperatureUnitToggle(this);
@@ -102,11 +98,11 @@ class WeatherApp {
   }
   updateDate() {
     const currentDate = new Date();
-    const dayOfWeek = this.DAY_OF_WEEK_COLLECTION[currentDate.getDay()];
+    const dayOfWeek = DAY_OF_WEEK_COLLECTION[currentDate.getDay()];
     console.log(dayOfWeek);
 
     const dayOfMonth = currentDate.getDate();
-    const month = this.MONTHS_COLLECTION[currentDate.getMonth()];
+    const month = MONTHS_COLLECTION[currentDate.getMonth()];
     const dateString = `${dayOfWeek} ${dayOfMonth} ${month}`;
 
     const dateElement = document.querySelector(".forecast-block__date-value");

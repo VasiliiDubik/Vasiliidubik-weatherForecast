@@ -1,7 +1,8 @@
+import translations from "../translations/EN_RU.js";
+
 class LanguageToggle {
   constructor(app) {
     this.app = app;
-    this.translations = app.translations;
     this.mapDisplay = app.mapDisplay;
     this.langButton = document.querySelector(".language-select__button");
     this.weatherCondition = document.querySelector(".weather-today__condition");
@@ -13,12 +14,19 @@ class LanguageToggle {
     this.currentLanguage = "en";
     this.latit = document.querySelector(".latitude-Location__text");
     this.langit = document.querySelector(".Longitude-Location__text");
-    this.firstDaylang = document.querySelector(".first-day");
-    this.secondDaylang = document.querySelector(".second-day");
-    this.lastDaylang = document.querySelector(".last-day");
+    this.firstDaylang = document.querySelector(
+      ".weather-future-day_first .weather-future-day__name"
+    );
+    this.secondDaylang = document.querySelector(
+      ".weather-future-day_second .weather-future-day__name"
+    );
+    this.lastDaylang = document.querySelector(
+      ".weather-future-day_last .weather-future-day__name"
+    );
     this.dateElement = document.querySelector(".forecast-block__date-value");
 
     this.setupEventListeners();
+    this.updateLanguageText();
   }
 
   setupEventListeners() {
@@ -38,22 +46,22 @@ class LanguageToggle {
   }
 
   updateLanguageText() {
-    const translations = this.translations[this.currentLanguage];
+    const currentTranslation = translations[this.currentLanguage];
 
-    this.weatherCondition.textContent = `${translations.overcast}`;
-    this.weatherFeelsLike.textContent = `${translations.feelsLike}: ${this.app.originalTemperatures?.feelsLike}°`;
+    this.weatherCondition.textContent = `${currentTranslation.overcast}`;
+    this.weatherFeelsLike.textContent = `${currentTranslation.feelsLike}: ${this.app.originalTemperatures?.feelsLike}°`;
 
-    this.weatherWind.textContent = `${translations.wind}: ${
+    this.weatherWind.textContent = `${currentTranslation.wind}: ${
       this.app.originalTemperatures?.wind || "N/A"
     } m/s`;
 
-    this.weatherHumidity.textContent = `${translations.humidity}: ${
+    this.weatherHumidity.textContent = `${currentTranslation.humidity}: ${
       this.app.originalTemperatures?.humidity || "N/A"
     }%`;
 
-    this.langButton.textContent = this.currentLanguage === "en" ? "RU" : "EN";
+    this.langButton.textContent = this.currentLanguage === "en" ? "EN" : "RU";
 
-    this.dateElement.textContent = this.getCurrentDateText(translations);
+    this.dateElement.textContent = this.getCurrentDateText(currentTranslation);
 
     if (this.app.location.latitude && this.app.location.longitude) {
       const formattedLatitude = this.mapDisplay.formatCoordinates(
@@ -63,17 +71,17 @@ class LanguageToggle {
         this.app.location.longitude
       );
 
-      this.latit.textContent = `${translations.latitude}: ${formattedLatitude}`;
-      this.langit.textContent = `${translations.longitude}: ${formattedLongitude}`;
+      this.latit.textContent = `${currentTranslation.latitude}: ${formattedLatitude}`;
+      this.langit.textContent = `${currentTranslation.longitude}: ${formattedLongitude}`;
     }
 
     const firstDayIndex = this.getDayOfWeekIndex(1);
     const secondDayIndex = this.getDayOfWeekIndex(2);
     const lastDayIndex = this.getDayOfWeekIndex(3);
 
-    this.firstDaylang.textContent = translations.days[firstDayIndex];
-    this.secondDaylang.textContent = translations.days[secondDayIndex];
-    this.lastDaylang.textContent = translations.days[lastDayIndex];
+    this.firstDaylang.textContent = currentTranslation.days[firstDayIndex];
+    this.secondDaylang.textContent = currentTranslation.days[secondDayIndex];
+    this.lastDaylang.textContent = currentTranslation.days[lastDayIndex];
   }
 
   getCurrentDateText(translations) {
