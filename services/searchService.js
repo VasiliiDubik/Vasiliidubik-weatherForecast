@@ -1,27 +1,7 @@
-import mapService from "./mapService.js";
+const apiKey = "50a738f4ae0fdc05df88af4f6a0dcf5f";
 
 class Search {
-  constructor(app) {
-    this.app = app;
-    this.searchInput = document.querySelector(".search-block__input");
-    this.searchButton = document.querySelector(".search-block__button");
-
-    this.setupEventListeners();
-  }
-
-  setupEventListeners() {
-    this.searchButton.addEventListener("click", () => {
-      const city = this.searchInput.value.trim();
-      if (city) {
-        this.fetchCityCoordinates(city);
-      } else {
-        alert("Please enter a city name!");
-      }
-    });
-  }
-
-  async fetchCityCoordinates(city) {
-    const apiKey = "50a738f4ae0fdc05df88af4f6a0dcf5f";
+  async getCoordinatesByCity(city) {
     const url = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`;
 
     try {
@@ -38,23 +18,7 @@ class Search {
         return;
       }
 
-      const { lat, lon } = data[0];
-      this.app.location = { latitude: lat, longitude: lon };
-
-      document.querySelector(
-        ".latitude-Location__text"
-      ).textContent = `latitude: ${lat.toFixed(2)}°`;
-      document.querySelector(
-        ".Longitude-Location__text"
-      ).textContent = `longitude: ${lon.toFixed(2)}°`;
-      console.log(this.app);
-
-      this.app.fetchWeather(lat, lon);
-      mapService.getCountryAndCity(lat, lon);
-      this.app.location = { latitude: lat, longitude: lon };
-      this.app.mapDisplay.updateLocation({
-        coords: { latitude: lat, longitude: lon },
-      });
+      return data;
     } catch (error) {
       console.error("Error fetching city coordinates:", error);
       alert("Failed to fetch city coordinates. Please try again later.");
@@ -62,4 +26,4 @@ class Search {
   }
 }
 
-export default Search;
+export const SearchInstance = new Search();

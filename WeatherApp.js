@@ -9,8 +9,7 @@ import TimeDisplay from "./components/TimeDisplay.js";
 import MapDisplay from "./components/MapDisplay.js";
 import WeatherIcons from "./components/WeatherIcons.js";
 import LanguageToggle from "./components/LanguageToggle.js";
-import Search from "./services/searchService.js";
-import mapService from "./services/mapService.js";
+import SearchInput from "./components/SearchInput.js";
 
 class WeatherApp {
   constructor() {
@@ -29,7 +28,7 @@ class WeatherApp {
     this.mapDisplay = new MapDisplay(this);
     this.weatherIcons = new WeatherIcons();
     this.languageToggle = new LanguageToggle(this);
-    this.search = new Search(this);
+    this.search = new SearchInput(this);
 
     this.setupEventListeners();
     this.backgroundChanger.changeBackground();
