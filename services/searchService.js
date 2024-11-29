@@ -1,3 +1,5 @@
+import mapService from "./mapService.js";
+
 class Search {
   constructor(app) {
     this.app = app;
@@ -24,11 +26,13 @@ class Search {
 
     try {
       const response = await fetch(url);
+
       if (!response.ok) {
         throw new Error("Error fetching city coordinates");
       }
 
       const data = await response.json();
+
       if (data.length === 0) {
         alert("City not found. Please try again!");
         return;
@@ -43,9 +47,14 @@ class Search {
       document.querySelector(
         ".Longitude-Location__text"
       ).textContent = `longitude: ${lon.toFixed(2)}°`;
+      console.log(this.app);
 
       this.app.fetchWeather(lat, lon);
-      this.app.mapDisplay.getCountryAndCity(lat, lon);
+      mapService.getCountryAndCity(lat, lon);
+      this.app.location = { latitude: lat, longitude: lon };
+      this.app.mapDisplay.updateLocation({
+        coords: { latitude: lat, longitude: lon },
+      });
     } catch (error) {
       console.error("Error fetching city coordinates:", error);
       alert("Failed to fetch city coordinates. Please try again later.");

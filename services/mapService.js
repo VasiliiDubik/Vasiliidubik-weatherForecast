@@ -1,5 +1,6 @@
 class MapService {
-  constructor() {
+  constructor(app) {
+    this.app = app;
     this.map = null;
     this.placemark = null;
   }
@@ -43,4 +44,5 @@ class MapService {
   }
 }
 const mapService = new MapService();
+
 export default mapService;
