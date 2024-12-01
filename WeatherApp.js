@@ -11,7 +11,6 @@ class WeatherApp {
   constructor() {
     this.location = {};
 
-    this.currentBackground = null;
     this.originalTemperatures = {};
 
     this.weatherDisplay = new WeatherDisplay(this);
@@ -23,23 +22,7 @@ class WeatherApp {
     this.languageToggle = new LanguageToggle(this);
     this.search = new SearchInput(this);
 
-    this.setupEventListeners();
-
     this.weatherIcons.updateWeatherIcons();
-  }
-
-  setupEventListeners() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        this.location = { latitude, longitude };
-        this.mapDisplay.updateLocation(position);
-        this.fetchWeather(latitude, longitude);
-      },
-      (error) => {
-        console.error("Ошибка определения местоположения:", error);
-      }
-    );
   }
 
   async fetchWeather(latitude, longitude) {

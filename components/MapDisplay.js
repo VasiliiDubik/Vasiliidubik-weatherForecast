@@ -10,6 +10,22 @@ class MapDisplay {
 
     this.map = null;
     this.placemark = null;
+
+    this.setupEventListeners();
+  }
+
+  setupEventListeners() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        this.location = { latitude, longitude };
+        this.updateLocation(position);
+        this.app.fetchWeather(latitude, longitude);
+      },
+      (error) => {
+        console.error("Ошибка определения местоположения:", error);
+      }
+    );
   }
 
   formatCoordinates(coordinates) {

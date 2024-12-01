@@ -11,10 +11,6 @@ class TimeDisplay {
 
     this.updateTimeAndDate();
     setInterval(() => this.updateTimeAndDate(), 5000);
-
-    // const currentDate = new Date();
-    // this.setTime(currentDate);
-    // this.setDate(currentDate);
   }
 
   updateTimeAndDate() {
