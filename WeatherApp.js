@@ -6,6 +6,7 @@ import MapDisplay from "./components/MapDisplay.js";
 import WeatherIcons from "./components/WeatherIcons.js";
 import LanguageToggle from "./components/LanguageToggle.js";
 import SearchInput from "./components/SearchInput.js";
+import { WeatherInstance } from "./services/weatherService.js";
 
 class WeatherApp {
   constructor() {
@@ -21,21 +22,15 @@ class WeatherApp {
     this.weatherIcons = new WeatherIcons();
     this.languageToggle = new LanguageToggle(this);
     this.search = new SearchInput(this);
-
-    this.weatherIcons.updateWeatherIcons();
   }
 
   async fetchWeather(latitude, longitude) {
     try {
-      const response = await fetch(
-        `https://api.weatherbit.io/v2.0/forecast/daily?lat=${latitude}&lon=${longitude}&key=01d210c51fcc4941af39f9056f62809c`
-      );
+      const data = await WeatherInstance.getCurrentWeather(latitude, longitude);
 
-      if (!response.ok) {
+      if (!data) {
         throw new Error("Ошибка при получении данных о погоде");
       }
-
-      const data = await response.json();
 
       this.originalTemperatures = {
         main: data.data[0].temp,
@@ -47,14 +42,11 @@ class WeatherApp {
         humidity: data.data[0].rh,
       };
 
-      const weatherIconsData = {
-        currentDay: data.data[0].weather.icon,
-        firstDay: data.data[1].weather.icon,
-        secondDay: data.data[2].weather.icon,
-        lastDay: data.data[3].weather.icon,
-      };
+      await this.weatherIcons.updateWeatherIconsFromLocation(
+        latitude,
+        longitude
+      );
 
-      this.weatherIcons.updateWeatherIcons(weatherIconsData);
       this.weatherDisplay.updateTemperatures("C");
     } catch (error) {
       console.error("Ошибка получения погоды:", error);

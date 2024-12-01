@@ -1,4 +1,5 @@
 import mapService from "../services/mapService.js";
+import { WeatherInstance } from "../services/weatherService.js";
 
 class MapDisplay {
   constructor(app) {

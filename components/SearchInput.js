@@ -1,5 +1,6 @@
 import mapService from "../services/mapService.js";
 import { SearchInstance } from "../services/searchService.js";
+import { WeatherInstance } from "../services/weatherService.js";
 
 class SearchInput {
   constructor(app) {
