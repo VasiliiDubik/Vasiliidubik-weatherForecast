@@ -13,9 +13,6 @@ import SearchInput from "./components/SearchInput.js";
 
 class WeatherApp {
   constructor() {
-    this.backgrounds = ["./img/bg1.png", "./img/bg2.png", "./img/bg3.png"];
-    this.sectionElement = document.querySelector(".section");
-    this.refreshButton = document.querySelector(".refresh-button");
     this.location = {};
 
     this.currentBackground = null;
@@ -31,7 +28,6 @@ class WeatherApp {
     this.search = new SearchInput(this);
 
     this.setupEventListeners();
-    this.backgroundChanger.changeBackground();
     this.timeDisplay.setTime(new Date());
     this.timeDisplay.setDate(new Date());
     setInterval(() => {
@@ -43,11 +39,6 @@ class WeatherApp {
   }
 
   setupEventListeners() {
-    this.refreshButton.addEventListener(
-      "click",
-      this.backgroundChanger.changeBackground.bind(this.backgroundChanger)
-    );
-
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;

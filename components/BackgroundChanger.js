@@ -1,9 +1,21 @@
 class BackgroundChanger {
   constructor(app) {
     this.app = app;
-    this.sectionElement = this.app.sectionElement;
-    this.backgrounds = this.app.backgrounds;
+    this.sectionElement = document.querySelector(".section");
+    this.backgrounds = ["./img/bg1.png", "./img/bg2.png", "./img/bg3.png"];
+    this.refreshButton = document.querySelector(".refresh-button");
+
     this.currentBackground = null;
+
+    this.changeBackground();
+    this.backgroundSwitch();
+  }
+
+  backgroundSwitch() {
+    this.refreshButton.addEventListener(
+      "click",
+      this.changeBackground.bind(this)
+    );
   }
 
   changeBackground() {
