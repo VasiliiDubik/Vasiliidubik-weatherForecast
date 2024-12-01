@@ -1,7 +1,3 @@
-import {
-  MONTHS_COLLECTION,
-  DAY_OF_WEEK_COLLECTION,
-} from "./constants/collections.js";
 import WeatherDisplay from "./components/WeatherDisplay.js";
 import TemperatureUnitToggle from "./components/TemperatureUnitToggle.js";
 import BackgroundChanger from "./components/BackgroundChanger.js";
@@ -28,13 +24,7 @@ class WeatherApp {
     this.search = new SearchInput(this);
 
     this.setupEventListeners();
-    this.timeDisplay.setTime(new Date());
-    this.timeDisplay.setDate(new Date());
-    setInterval(() => {
-      const currentDate = new Date();
-      this.timeDisplay.setTime(currentDate);
-      this.timeDisplay.setDate(currentDate);
-    }, 5000);
+
     this.weatherIcons.updateWeatherIcons();
   }
 
@@ -86,18 +76,6 @@ class WeatherApp {
     } catch (error) {
       console.error("Ошибка получения погоды:", error);
     }
-  }
-  updateDate() {
-    const currentDate = new Date();
-    const dayOfWeek = DAY_OF_WEEK_COLLECTION[currentDate.getDay()];
-    console.log(dayOfWeek);
-
-    const dayOfMonth = currentDate.getDate();
-    const month = MONTHS_COLLECTION[currentDate.getMonth()];
-    const dateString = `${dayOfWeek} ${dayOfMonth} ${month}`;
-
-    const dateElement = document.querySelector(".forecast-block__date-value");
-    dateElement.textContent = dateString;
   }
 }
 

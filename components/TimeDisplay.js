@@ -9,6 +9,15 @@ class TimeDisplay {
     this.timeElement = document.querySelector(".forecast-block__time");
     this.dateElement = document.querySelector(".forecast-block__date-value");
 
+    this.updateTimeAndDate();
+    setInterval(() => this.updateTimeAndDate(), 5000);
+
+    // const currentDate = new Date();
+    // this.setTime(currentDate);
+    // this.setDate(currentDate);
+  }
+
+  updateTimeAndDate() {
     const currentDate = new Date();
     this.setTime(currentDate);
     this.setDate(currentDate);
