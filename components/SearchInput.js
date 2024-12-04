@@ -1,6 +1,5 @@
 import mapService from "../services/mapService.js";
-import { SearchInstance } from "../services/searchService.js";
-import { weatherInstance } from "../services/weatherService.js";
+import { searchInstance } from "../services/searchService.js";
 
 class SearchInput {
   constructor(app) {
@@ -23,7 +22,7 @@ class SearchInput {
   }
 
   async updateCoordinates(city) {
-    const data = await SearchInstance.getCoordinatesByCity(city);
+    const data = await searchInstance.getCoordinatesByCity(city);
     const { lat, lon } = data[0];
 
     this.app.location = { latitude: lat, longitude: lon };
@@ -35,7 +34,7 @@ class SearchInput {
       ".Longitude-Location__text"
     ).textContent = `longitude: ${lon.toFixed(2)}°`;
 
-    this.app.fetchWeather(lat, lon);
+    this.app.weatherDisplay.fetchWeather(lat, lon);
     mapService.getCountryAndCity(lat, lon);
     this.app.location = { latitude: lat, longitude: lon };
     this.app.mapDisplay.updateLocation({

@@ -1,5 +1,4 @@
 import mapService from "../services/mapService.js";
-import { weatherInstance } from "../services/weatherService.js";
 
 class MapDisplay {
   constructor(app) {
@@ -21,7 +20,7 @@ class MapDisplay {
         const { latitude, longitude } = position.coords;
         this.location = { latitude, longitude };
         this.updateLocation(position);
-        this.app.fetchWeather(latitude, longitude);
+        this.app.weatherDisplay.fetchWeather(latitude, longitude);
       },
       (error) => {
         console.error("Ошибка определения местоположения:", error);

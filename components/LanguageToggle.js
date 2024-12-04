@@ -49,14 +49,14 @@ class LanguageToggle {
     const currentTranslation = translations[this.currentLanguage];
 
     this.weatherCondition.textContent = `${currentTranslation.overcast}`;
-    this.weatherFeelsLike.textContent = `${currentTranslation.feelsLike}: ${this.app.originalTemperatures?.feelsLike}°`;
+    this.weatherFeelsLike.textContent = `${currentTranslation.feelsLike}: ${this.app.weatherDisplay.originalTemperatures?.feelsLike}°`;
 
     this.weatherWind.textContent = `${currentTranslation.wind}: ${
-      this.app.originalTemperatures?.wind || "N/A"
+      this.app.weatherDisplay.originalTemperatures?.wind || "N/A"
     } m/s`;
 
     this.weatherHumidity.textContent = `${currentTranslation.humidity}: ${
-      this.app.originalTemperatures?.humidity || "N/A"
+      this.app.weatherDisplay.originalTemperatures?.humidity || "N/A"
     }%`;
 
     this.langButton.textContent = this.currentLanguage === "en" ? "EN" : "RU";

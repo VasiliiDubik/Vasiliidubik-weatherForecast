@@ -26,4 +26,4 @@ class Search {
   }
 }
 
-export const SearchInstance = new Search();
+export const searchInstance = new Search();
