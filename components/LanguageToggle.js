@@ -1,4 +1,4 @@
-import translations from "../translations/EN_RU.js";
+import translations from "../translations/Translate.js";
 
 class LanguageToggle {
   constructor(app) {
