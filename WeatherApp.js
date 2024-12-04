@@ -6,7 +6,7 @@ import MapDisplay from "./components/MapDisplay.js";
 import WeatherIcons from "./components/WeatherIcons.js";
 import LanguageToggle from "./components/LanguageToggle.js";
 import SearchInput from "./components/SearchInput.js";
-import { WeatherInstance } from "./services/weatherService.js";
+import { weatherInstance } from "./services/weatherService.js";
 
 class WeatherApp {
   constructor() {
@@ -26,7 +26,7 @@ class WeatherApp {
 
   async fetchWeather(latitude, longitude) {
     try {
-      const data = await WeatherInstance.getCurrentWeather(latitude, longitude);
+      const data = await weatherInstance.getCurrentWeather(latitude, longitude);
 
       if (!data) {
         throw new Error("Ошибка при получении данных о погоде");

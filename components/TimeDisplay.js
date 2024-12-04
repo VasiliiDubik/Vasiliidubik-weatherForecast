@@ -16,7 +16,6 @@ class TimeDisplay {
   updateTimeAndDate() {
     const currentDate = new Date();
     this.setTime(currentDate);
-    this.setDate(currentDate);
   }
 
   setTime(currentDate) {

@@ -2,9 +2,7 @@ const currentWeatherApiKey = "01d210c51fcc4941af39f9056f62809c";
 
 class WeatherService {
   async getCurrentWeather(latitude, longitude) {
-    // const response = await fetch(
     const weatherUrl = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${latitude}&lon=${longitude}&key=${currentWeatherApiKey}`;
-    // );
 
     try {
       const response = await fetch(weatherUrl);
@@ -22,5 +20,4 @@ class WeatherService {
   }
 }
 
-// export default new WeatherService();
-export const WeatherInstance = new WeatherService();
+export const weatherInstance = new WeatherService();

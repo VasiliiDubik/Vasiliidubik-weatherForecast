@@ -1,4 +1,4 @@
-import { WeatherInstance } from "../services/weatherService.js";
+import { weatherInstance } from "../services/weatherService.js";
 
 class WeatherIcons {
   constructor() {
@@ -14,7 +14,7 @@ class WeatherIcons {
 
   async updateWeatherIconsFromLocation(latitude, longitude) {
     try {
-      const data = await WeatherInstance.getCurrentWeather(latitude, longitude);
+      const data = await weatherInstance.getCurrentWeather(latitude, longitude);
       if (!data) {
         throw new Error("Ошибка при получении данных о погоде");
       }
